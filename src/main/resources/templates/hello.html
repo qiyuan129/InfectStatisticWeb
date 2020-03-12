@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <!--你自己写的样式文件，尽量不要放在bootstrap.min.css之前-->
+    <link href="../static/css/mycss.css" rel="stylesheet">
+    <script type="text/javascript" src="../static/js/echarts.js" ></script>
+</head>
+
+
+<body>
+<div class=".container-fluid">
+    <div class="row">
+        <div class="col-md-12"></div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tab-pane">
+                <p>hello my chart</p>
+                <div id="main" style="width: 1600px;height:400px;"></div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="col-xs-6">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">网站统计</div>
+            <div class="panel-body">
+
+            </div>
+
+        </div>
+
+
+
+
+    <div class="row">
+        <div class="col-md-12"></div>
+    </div>
+
+</div>
+
+
+
+
+<script type="text/javascript">
+
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    /*window.addEventListener("resize", function () {
+        myChart.resize();
+        myChart.resize();
+
+    });*/
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: 'ECharts 入门示例'
+        },
+        tooltip: {},
+        legend: {
+            data:['销量']
+        },
+        xAxis: {
+            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+        }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+    window.addEventListener("resize", function () {
+        myChart.resize();
+        myChart.resize();
+
+    });
+</script>
+
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<!--官方建议这三个<script>标签写在body结束标签之前，三个标签顺序不能搞乱-->
+<script src="../static/js/jquery-3.2.1.min.js"></script>
+<script src="../static/js/popper.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+</body>
+</html>

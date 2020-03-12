@@ -8,6 +8,7 @@ public class InfectStatisticWebApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(InfectStatisticWebApplication.class, args);
+
     }
 
 }
