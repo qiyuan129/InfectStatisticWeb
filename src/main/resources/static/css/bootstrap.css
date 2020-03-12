@@ -4314,14 +4314,20 @@ input[type="button"].btn-block {
   text-align: center;
 }
 
+
+
 .tab-content > .tab-pane {
   display: block;
+  hight:0;
+  overflow-y: hidden;
 
 }
 
 .tab-content > .active {
-  display: block;
+  /*display: block;*/
+  height: available;
 }
+
 
 
 .navbar {

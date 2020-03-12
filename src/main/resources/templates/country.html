@@ -24,17 +24,14 @@
     </div>
 
     <div class="myTextRow">
-        <p>头下</p>
+        <p>总数据展示</p>
 
         <table></table>
     </div>
 
-
-
-
     <div >
         <h1 class="myH1">全国疫情分布</h1>
-            <div id="china_map" class="china_chart"></div>
+            <div id="china_map" class="charts"></div>
     </div>
 
 
@@ -54,24 +51,11 @@
 
 
 
-
-
-
-
 <script src="http://gallery.echartsjs.com/dep/echarts/map/js/china.js" charset="utf-8"></script>
 <script>
 
     var myDate = new Date();
-
     var china_chart = echarts.init(document.getElementById('china_map'));
-    china_chart.on('click', function(params) {//点击事件
-        if(params.componentType=="series"){
-            alert("我是警告")
-
-        }
-    })
-
-
     //数据纯属虚构
     var data = [
         {
@@ -211,14 +195,10 @@
             value: 3
         }
     ];
-
     var yData = [];//省份
     var barData = [];//状态条
 
-    /* for (var i = 0; i < 10; i++) {
-         barData.push(data[i]);
-         yData.push(i + data[i].name);
-     }*/
+
 
     var option = {
 
@@ -433,6 +413,120 @@
 
         ]
     };
+
+    china_chart.on('click', function (param){
+        /*if(param.componentType=="series"){
+            alert("我是警告")
+
+        }*/
+        var selected = param.name;
+        if (selected) {
+            switch(selected){
+                case '四川':
+                    location.href = "test";
+                    break;
+                case '云南':
+                    location.href = "test";
+                    break;
+                case '新疆':
+                    location.href = "test";
+                    break;
+                case '青海':
+                    location.href = "test";
+                    break;
+                case '宁夏':
+                    location.href = "test";
+                    break;
+                case '甘肃':
+                    location.href = "test";
+                    break;
+                case '内蒙古':
+                    location.href = "test";
+                    break;
+                case '陕西':
+                    location.href = "test";
+                    break;
+                case '山西':
+                    location.href = "test";
+                    break;
+                case '重庆':
+                    location.href = "test";
+                    break;
+                case '贵州':
+                    location.href = "test";
+                    break;
+                case '广西':
+                    location.href = "test";
+                    break;
+                case '海南':
+                    location.href = "test";
+                    break;
+                case '广东':
+                    location.href = "test";
+                    break;
+                case '湖南':
+                    location.href = "test";
+                    break;
+                case '湖北':
+                    location.href = "test";
+                    break;
+                case '河南':
+                    location.href = "test";
+                    break;
+                case '河北':
+                    location.href = "test";
+                    break;
+                case '北京':
+                    location.href = "test";
+                    break;
+                case '天津':
+                    location.href = "test";
+                    break;
+                case '黑龙江':
+                    location.href = "test";
+                    break;
+                case '吉林':
+                    location.href = "test";
+                    break;
+                case '辽宁':
+                    location.href = "test";
+                    break;
+                case '山东':
+                    location.href = "test";
+                    break;
+                case '江苏':
+                    location.href = "test";
+                    break;
+                case '安徽':
+                    location.href = "test";
+                    break;
+                case '上海':
+                    location.href = "test";
+                    break;
+                case '浙江':
+                    location.href = "test";
+                    break;
+                case '福建':
+                    location.href = "test";
+                    break;
+                case '江西':
+                    location.href = "test";
+                    break;
+                case '台湾':
+                    location.href = "test";
+                    break;
+                case '香港':
+                    location.href = "test";
+                    break;
+                case '澳门':
+                    location.href = "test";
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    });
 
 
     china_chart.setOption(option);

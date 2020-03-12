@@ -1,102 +1,456 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <title>全国数据</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <!--你自己写的样式文件，尽量不要放在bootstrap.min.css之前-->
-    <link href="../static/css/mycss.css" rel="stylesheet">
-    <script type="text/javascript" src="../static/js/jquery-3.2.1.min.js"></script>
-    <script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>
-
-
+    <link href="/css/mycss.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/echarts/3.7.1/echarts.min.js"></script>
+    <script src="http://gallery.echartsjs.com/dep/echarts/map/js/china.js"></script>
 </head>
-
-
-<body>
+<body class="yabg">
 
 <div class=".container-fluid">
-   <div class="yabg">
-       <div class="row">
-       <div class="col-md-12"></div>
-   </div>
+    <div class="myRow">
+        <div class="col-md-12">
+            <h1 class="myH1">新型冠状肺炎</h1>
+            <p>全国实时动态</p>
+            <p>空昂实时数据</p>
+            <button class="btn btn-success" type="submit">Button</button>
+        </div>
+    </div>
 
+    <div class="myTextRow">
+        <p>总数据展示</p>
 
-       <p>hello my chartss</p>
-       <div id="main" style="width: 1600px;height:400px;"></div>
+        <table></table>
+    </div>
 
-
-       <div class="col-xs-6">
-           <div class="panel panel-default">
-               <!-- Default panel contents -->
-               <div class="panel-heading">网站统计</div>
-               <div class="panel-body">
-
-               </div>
-           </div>
-
-           </div>
-
+    <div >
+        <h1 class="myH1">全国疫情分布</h1>
+        <div id="china_map" class="charts"></div>
+    </div>
 
 
 
-           <div class="row">
-               <div class="col-md-12"></div>
-           </div>
+    <div class="myRow">
+        <div class="col-md-12">
+            <p>尾</p>
+        </div>
+    </div>
 
-       </div>
+
 </div>
 
 
 
 
-<script type="text/javascript">
 
-    // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'));
 
-    /*window.addEventListener("resize", function () {
-        myChart.resize();
-        myChart.resize();
 
-    });*/
-    // 指定图表的配置项和数据
+<script src="http://gallery.echartsjs.com/dep/echarts/map/js/china.js" charset="utf-8"></script>
+<script>
+
+    var myDate = new Date();
+
+    var china_chart = echarts.init(document.getElementById('china_map'));
+    /*china_chart.on('click', function(params) {//点击事件
+        if(params.componentType=="series"){
+            alert("我是警告")
+
+        }
+    })*/
+
+
+    //数据纯属虚构
+    var data = [
+        {
+            name: '江苏',
+            value: 135
+        },
+        {
+            name: '北京',
+            value: 157
+        },
+        {
+            name: '上海',
+            value: 58
+        },
+        {
+            name: '重庆',
+            value: 186
+        },
+        {
+            name: '河北',
+            value: 37
+        },
+        {
+            name: '河南',
+            value: 187
+        },
+        {
+            name: '云南',
+            value: 22
+        },
+        {
+            name: '辽宁',
+            value: 24
+        },
+        {
+            name: '黑龙江',
+            value: 198
+        },
+        {
+            name: '湖南',
+            value: 209
+        },
+        {
+            name: '安徽',
+            value: 197
+        },
+        {
+            name: '山东',
+            value: 365
+        },
+        {
+            name: '新疆',
+            value: 31
+        },
+        {
+            name: '江苏',
+            value: 135
+        },
+        {
+            name: '浙江',
+            value: 277
+        },
+        {
+            name: '江西',
+            value: 179
+        },
+        {
+            name: '湖北',
+            value: 39625
+        },
+        {
+            name: '广西',
+            value: 88
+        },
+        {
+            name: '甘肃',
+            value: 8
+        },
+        {
+            name: '山西',
+            value: 29
+        },
+        {
+            name: '内蒙古',
+            value: 36
+        },
+        {
+            name: '陕西',
+            value: 50
+        },
+        {
+            name: '吉林',
+            value: 25
+        },
+        {
+            name: '福建',
+            value: 67
+        },
+        {
+            name: '贵州',
+            value: 32
+        },
+        {
+            name: '广东',
+            value: 444
+        },
+        {
+            name: '青海',
+            value: 0
+        },
+        {
+            name: '西藏',
+            value: 0
+        },
+        {
+            name: '四川',
+            value: 210
+        },
+        {
+            name: '宁夏',
+            value: 4
+        },
+        {
+            name: '海南',
+            value: 32
+        },
+        {
+            name: '台湾',
+            value: 26
+        },
+        {
+            name: '香港',
+            value: 66
+        },
+        {
+            name: '澳门',
+            value: 3
+        }
+    ];
+
+    var yData = [];//省份
+    var barData = [];//状态条
+
     var option = {
-        title: {
-            text: 'ECharts 入门示例'
+
+        tooltip: {// 鼠标移到图里面的浮动提示框
+            show: true,
+            formatter: function(params) {
+                return params.name + '：' + params.data['value'] +"人"
+            },
         },
-        tooltip: {},
-        legend: {
-            data:['销量']
+
+
+        // visualMap的详细配置解析：https://echarts.baidu.com/option.html#visualMap
+        visualMap: { // 左下角的颜色区域
+            type: 'piecewise', // 定义为分段型 visualMap
+            min: 0,
+            max: 1000,
+            itemWidth: 40,
+            bottom: 60,
+            left: 20,
+            pieces: [ // 自定义『分段式视觉映射组件（visualMapPiecewise）』的每一段的范围，以及每一段的文字，以及每一段的特别的样式
+                {gt: 10000, lte:50000 , label: '>=10000', color: '#64153e'}, // (900, 1000]
+                {gt: 1000, lte: 9999, label: '1000-9999', color: '#79316b'}, // (500, 900]
+                {gt: 100, lte: 999, label: '100-999', color: '#ff4874'}, // (310, 500]
+                {gt: 10, lte: 99, label: '10-99', color: '#ffbbb3'}, // (200, 300]
+                {gt: 1, lte: 9, label: '1-9', color: 'orangered'}, // (10, 200]
+                {value: 0, label: '0', color: '#eddfff'} // [0]
+            ]
         },
+
+
+        grid: {
+            right: 10,
+            top: 135,
+            bottom: 100,
+            width: '20%'
+        },
+
         xAxis: {
-            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+            show: false
         },
-        yAxis: {},
-        series: [{
-            name: '销量',
-            type: 'bar',
-            data: [5, 20, 36, 10, 10, 20]
-        }]
+
+        yAxis: {
+            type: 'category',
+            inverse: true,
+            nameGap: 16,
+            axisLine: {
+                show: false,
+                lineStyle: {
+                    color: '#ddd'
+                }
+            },
+
+            axisTick: {
+                show: false,
+                lineStyle: {
+                    color: '#ddd'
+                }
+            },
+
+            axisLabel: {
+                interval: 0,
+                margin: 85,
+                textStyle: {
+                    color: '#455A74',
+                    align: 'left',
+                    fontSize: 14
+                },
+
+                rich: {
+                    a: {
+                        color: '#fff',
+                        backgroundColor: '#FAAA39',
+                        width: 20,
+                        height: 20,
+                        align: 'center',
+                        borderRadius: 2
+                    },
+                    b: {
+                        color: '#fff',
+                        backgroundColor: '#4197FD',
+                        width: 20,
+                        height: 20,
+                        align: 'center',
+                        borderRadius: 2
+                    }
+                },
+
+                formatter: function(params) {
+                    if (parseInt(params.slice(0, 1)) < 3) {
+                        return [
+                            '{a|' + (parseInt(params.slice(0, 1)) + 1) + '}' + '  ' + params.slice(1)
+                        ].join('\n')
+                    } else {
+                        return [
+                            '{b|' + (parseInt(params.slice(0, 1)) + 1) + '}' + '  ' + params.slice(1)
+                        ].join('\n')
+                    }
+                }
+            },
+            data: yData
+        },
+
+        // geo配置详解： https://echarts.baidu.com/option.html#geo
+        geo: {// 地理坐标系组件用于地图的绘制
+            //roam: true,
+            map: 'china',
+            left: 'left',
+            right: '300',
+            // layoutSize: '80%',
+            label: {//地图色块的label显示
+                /* emphasis: {
+                     show: true
+                 }*/
+                show : true
+            },
+            itemStyle: {
+                BorderColor :'rgba(2,0,0,0.2)',
+                emphasis: {//高亮状态下的多边形和标签样式
+                    shadowBlur:1,//阴影
+                    areaColor: '#fff464'
+                }
+            }
+        },
+
+        series: [
+            {//浮动框，中国地图
+                name: 'mapSer',
+                type: 'map',
+                roam: false,
+                geoIndex: 0,
+                label: {
+                    show: false,
+                },
+                data: data
+            },
+
+            {//最右边的条形图
+                name: 'barSer',
+                type: 'bar',
+                roam: false,
+                visualMap: false,
+                zlevel: 2,
+                barMaxWidth: 8,
+                barGap: 0,
+                itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            // build a color map as your need.
+                            var colorList = [{
+                                colorStops: [{
+                                    offset: 0,
+                                    color: '#FFD119' // 0% 处的颜色
+                                }, {
+                                    offset: 1,
+                                    color: '#FFAC4C' // 100% 处的颜色
+                                }]
+                            },
+                                {
+                                    colorStops: [{
+                                        offset: 0,
+                                        color: '#00C0FA' // 0% 处的颜色
+                                    }, {
+                                        offset: 1,
+                                        color: '#2F95FA' // 100% 处的颜色
+                                    }]
+                                }
+                            ];
+                            if (params.dataIndex < 3) {
+                                return colorList[0]
+                            } else {
+                                return colorList[1]
+                            }
+                        },
+                        barBorderRadius: 15
+                    }
+                },
+                data: barData
+            }
+
+        ]
     };
 
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
-    window.addEventListener("resize", function () {
-        myChart.resize();
-        myChart.resize();
+    china_chart.on('click', function (param){
+        /*if(param.componentType=="series"){
+            alert("我是警告")
 
+        }*/
+        var selected = param.name;
+        if (selected) {
+            switch(selected){
+                case '四川':
+                    location.href = "test";
+                    break;
+                case '云南':
+                    location.href = "test";
+                    break;
+                case '朝阳市':
+                    location.href = "{:U('Goods/index_city',array('id'=>13))}";
+                    break;
+                case '锦州市':
+                    location.href = "{:U('Goods/index_city',array('id'=>12))}";
+                    break;
+                case '阜新市':
+                    location.href ="{:U('Goods/index_city',array('id'=>11))}";
+                    break;
+                case '盘锦市':
+                    location.href = "{:U('Goods/index_city',array('id'=>10))}";
+                    break;
+                case '大连市':
+                    location.href = "{:U('Goods/index_city',array('id'=>9))}";
+                    break;
+                case '营口市':
+                    location.href = "{:U('Goods/index_city',array('id'=>8))}";
+                    break;
+                case '鞍山市':
+                    location.href = "{:U('Goods/index_city',array('id'=>7))}";
+                    break;
+                case '丹东市':
+                    location.href = "{:U('Goods/index_city',array('id'=>6))}";
+                    break;
+                case '辽阳市':
+                    location.href = "{:U('Goods/index_city',array('id'=>5))}";
+                    break;
+                case '本溪市':
+                    location.href = "{:U('Goods/index_city',array('id'=>4))}";
+                    break;
+                case '抚顺市':
+                    location.href ="{:U('Goods/index_city',array('id'=>2))}";
+                    break;
+                case '铁岭市':
+                    location.href = "{:U('Goods/index_city',array('id'=>1))}";
+                    break;
+                default:
+                    break;
+            }
+
+        }
     });
+
+
+    china_chart.setOption(option);
+
+
 </script>
-
-
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<!--官方建议这三个<script>标签写在body结束标签之前，三个标签顺序不能搞乱-->
-<script src="../static/js/jquery-3.2.1.min.js"></script>
-<script src="../static/js/popper.js"></script>
-<script src="../static/js/bootstrap.min.js"></script>
 
 </body>
 </html>

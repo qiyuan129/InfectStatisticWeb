@@ -16,9 +16,14 @@ public class IndexController {
     public String test(){
         return "test";
     }
+
     @RequestMapping("/hello")
     public String hello(){
         return "hello";
+    }
+    @RequestMapping("/province")
+    public String province(){
+        return "province";
     }
 
 }
