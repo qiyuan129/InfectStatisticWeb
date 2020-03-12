@@ -3,14 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <title>全国数据</title>
-    <script type="text/javascript" src="../static/js/echarts.min.js" ></script>
-    <script type="text/javascript" src="../static/js//china.js" ></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!--你自己写的样式文件，尽量不要放在bootstrap.min.css之前-->
+    <link href="/css/mycss.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/echarts/3.7.1/echarts.min.js"></script>
+    <script src="http://gallery.echartsjs.com/dep/echarts/map/js/china.js"></script>
 </head>
-<body>
-<p>这是全国首页1</p>
+<body class="yabg">
 
-<div id="china_map" style="width: 1000px;height:800px"></div>
-<script src="../static/js/china.js" charset="utf-8"></script>
+<div class=".container-fluid">
+    <div class="myRow">
+        <div class="col-md-12">
+            <h1 class="myH1">新型冠状肺炎</h1>
+            <p>全国实时动态</p>
+            <p>空昂实时数据</p>
+            <button class="btn btn-success" type="submit">Button</button>
+        </div>
+    </div>
+
+    <div class="myTextRow">
+        <p>头下</p>
+
+        <table></table>
+    </div>
+
+
+
+
+    <div >
+        <h1 class="myH1">全国疫情分布</h1>
+            <div id="china_map" class="china_chart"></div>
+    </div>
+
+
+
+    <div class="myRow">
+        <div class="col-md-12">
+            <p>尾</p>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<script src="http://gallery.echartsjs.com/dep/echarts/map/js/china.js" charset="utf-8"></script>
 <script>
 
     var myDate = new Date();
@@ -391,8 +439,6 @@
 
 
 </script>
-
-</div>
 
 </body>
 </html>

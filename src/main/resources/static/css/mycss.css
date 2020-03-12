@@ -1,0 +1,41 @@
+.china_chart{
+    width: 80%;height:800px;
+    margin:0 auto;
+}
+
+.yabg{
+    background:url("../images/bgimg.jpg") no-repeat center fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;//自适应屏幕
+    text-align:center;
+}
+
+
+.myRow {
+    display: -ms-flexbox;
+    display: flex;
+    opacity:80%;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin:0 auto;
+    background-color: #384fbf;
+    width: 80%;height:200px
+}
+
+
+.myTextRow {
+    display: -ms-flexbox;
+    display: flex;
+    opacity:80%;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin:0 auto;
+    background-color: #bfbabb;
+    width: 80%;height:180px
+}
+
+.myH1{
+    text-align: center;
+    color: #c6ba1f;
+}
