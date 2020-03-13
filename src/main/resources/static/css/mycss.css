@@ -43,7 +43,7 @@
     flex-wrap: wrap;
     margin:0 auto;
     background-color: #0865fb;
-    width: 75%;height:200px
+    width: 75%;height:180px
 }
 
 
@@ -54,7 +54,9 @@
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     margin:0 auto;
-    background-color: #bfbabb;
+    word-wrap: break-word;/*自动换行*/
+    overflow:hidden;/*超出部分隐藏*/
+    background-color: #fffefd;
     width: 75%;height:180px
 }
 
@@ -69,6 +71,9 @@
     color: #efff35;
 }
 
+.myP{
+    text-align: center;
+}
 
 
 

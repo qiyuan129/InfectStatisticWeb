@@ -27,10 +27,5 @@ public class CountryController {
         infectInfoOperator.output();
     }
 
-    @RequestMapping("/testRun")
-    public String testRun(){
-        //用于测试，之后会删除
-        return "index.html";
-    }
 
 }
