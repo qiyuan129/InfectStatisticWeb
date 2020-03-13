@@ -131,64 +131,76 @@ public class InfectStatistic {
             endDate = date;
         }
 
-        if (types == null) {
-            outputTypes = DailyInfo.ALL_TYPES;
-        } else {
-            outputTypes = types.toArray(new String[types.size()]);
-        }
+//        if (types == null) {
+//            outputTypes = DailyInfo.ALL_TYPES;
+//        } else {
+//            outputTypes = types.toArray(new String[types.size()]);
+//        }
 
         //获取全国统计信息及各省统计信息
         countryTotalInfo = country.getCountryTotalInfo(endDate);
         provinceDailyInfos = country.getAllProvincesInfo(endDate);
 
 
-        if (provinces == null) {
-            //未指定省份时只打印全国和在日志中出现过的省份
-            System.out.println("全国 " + countryTotalInfo.toString(outputTypes) + '\n');
+//        if (provinces == null) {
+//            //未指定省份时只打印全国和在日志中出现过的省份
+//            System.out.println("全国 " + countryTotalInfo.toString(outputTypes) + '\n');
+//
+//            for (String provinceName : Country.PROVINCES) {
+//                Province province = country.getProvince(provinceName);
+//
+//                if (province.hasOccurred == true) {
+//                    DailyInfo provinceInfo = provinceDailyInfos.get(provinceName);
+//                    System.out.println(provinceName + " " + provinceInfo.toString(outputTypes) + '\n');
+//                }
+//            }
+//        } else {
+//            if (provinces.contains("全国")) {
+//                System.out.println("全国 " + countryTotalInfo.toString(outputTypes) + '\n');
+//                provinces.remove("全国");
+//            }
+//
+//            //使用自定义比较函数对省份进行按拼音的排序
+//            Collections.sort(provinces, new Comparator<String>() {
+//                @Override
+//                public int compare(String s, String t1) {
+//                    int weight1 = provinceWeight.get(s);
+//                    int weight2 = provinceWeight.get(t1);
+//
+//                    return weight1 - weight2;
+//                }
+//            });
+//
+//            //遍历指定的省份
+//            for (String provinceName : provinces) {
+//                Province province = country.getProvince(provinceName);
+//
+//                //省份在日志出现过，就打印统计得到的数据，否则直接全输出0
+//                if (province.hasOccurred == true) {
+//                    DailyInfo provinceInfo = provinceDailyInfos.get(provinceName);
+//                    System.out.println(provinceName + " " + provinceInfo.toString(outputTypes) + '\n');
+//                } else {
+//                    DailyInfo emptyInfo = new DailyInfo(endDate);
+//                    System.out.println(provinceName + " " + emptyInfo.toString(outputTypes) + '\n');
+//                }
+//            }
+//        }
 
-            for (String provinceName : Country.PROVINCES) {
-                Province province = country.getProvince(provinceName);
-
-                if (province.hasOccurred == true) {
-                    DailyInfo provinceInfo = provinceDailyInfos.get(provinceName);
-                    System.out.println(provinceName + " " + provinceInfo.toString(outputTypes) + '\n');
-                }
-            }
-        } else {
-            if (provinces.contains("全国")) {
-                System.out.println("全国 " + countryTotalInfo.toString(outputTypes) + '\n');
-                provinces.remove("全国");
-            }
-
-            //使用自定义比较函数对省份进行按拼音的排序
-            Collections.sort(provinces, new Comparator<String>() {
-                @Override
-                public int compare(String s, String t1) {
-                    int weight1 = provinceWeight.get(s);
-                    int weight2 = provinceWeight.get(t1);
-
-                    return weight1 - weight2;
-                }
-            });
-
-            //遍历指定的省份
-            for (String provinceName : provinces) {
-                Province province = country.getProvince(provinceName);
-
-                //省份在日志出现过，就打印统计得到的数据，否则直接全输出0
-                if (province.hasOccurred == true) {
-                    DailyInfo provinceInfo = provinceDailyInfos.get(provinceName);
-                    System.out.println(provinceName + " " + provinceInfo.toString(outputTypes) + '\n');
-                } else {
-                    DailyInfo emptyInfo = new DailyInfo(endDate);
-                    System.out.println(provinceName + " " + emptyInfo.toString(outputTypes) + '\n');
-                }
-            }
-        }
-
-        System.out.println("// 该文档并非真实数据，仅供测试使用");
+//        System.out.println("// 该文档并非真实数据，仅供测试使用");
 
     }
 
+    public DailyInfo getCountryLatestStatistic(){
+        LocalDate latestDate;
+        latestDate=logList.getEndDate();
 
+        return country.getCountryTotalInfo(latestDate);
+    }
+
+    public HashMap<String,DailyInfo> getProvinceLatestStatistic(){
+        LocalDate latestDate;
+        latestDate=logList.getEndDate();
+
+        return country.getAllProvincesInfo(latestDate);
+    }
 }
