@@ -19,59 +19,30 @@ import java.util.HashMap;
 public class CountryController {
 
     @RequestMapping("/country")
-    public ModelAndView getCountryStatistic(){
-        Resource resource = new ClassPathResource("logs");
-        ModelAndView modelAndView = null;
-//// 有些系统提示找不到资源，可以把上面的代码换成下面这句：
-//// ClassPathResource resource = new ClassPathResource("picture/bottom.png");
-        try {
-            File sourceFile =  resource.getFile();
-            String path=sourceFile.getPath();
-            String[] args={"-log",path};
-            InfectStatistic infectInfoOperator = new InfectStatistic(args);
-            infectInfoOperator.readLogs();
+    public ModelAndView getCountryStatistic(String dateStr){
+        InfectStatistic infectInfoOperator = new InfectStatistic();
+        infectInfoOperator.readLogs();
+        DailyInfo countryInfo=infectInfoOperator.getCountryLatestStatistic();
 
-            DailyInfo countryInfo=infectInfoOperator.getCountryLatestStatistic();
-            modelAndView = new ModelAndView();
-            modelAndView.setViewName("country");
-            modelAndView.addObject("countryInfo", countryInfo);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("country");
+        modelAndView.addObject("countryInfo", countryInfo);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //System.out.println(countryInfo.toString(DailyInfo.ALL_TYPES));
         return modelAndView;
-
-
-
-
     }
 
     @RequestMapping("/provinces")
     public ModelAndView getProvinceStatistic(){
-        Resource resource = new ClassPathResource("logs");
-        ModelAndView modelAndView = null;
-//// 有些系统提示找不到资源，可以把上面的代码换成下面这句：
-//// ClassPathResource resource = new ClassPathResource("picture/bottom.png");
-        try {
-            File sourceFile =  resource.getFile();
-            String path=sourceFile.getPath();
-            String[] args={"-log",path};
-            InfectStatistic infectInfoOperator = new InfectStatistic(args);
-            infectInfoOperator.readLogs();
+        InfectStatistic infectInfoOperator = new InfectStatistic();
+        infectInfoOperator.readLogs();
 
-            HashMap<String,DailyInfo> provinceInfos=infectInfoOperator.getProvinceLatestStatistic();
-            modelAndView = new ModelAndView();
-            modelAndView.setViewName("province");
-            modelAndView.addObject("provinceInfos",provinceInfos);
+        HashMap<String,DailyInfo> provinceInfos=infectInfoOperator.getProvinceLatestStatistic();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("province");
+        modelAndView.addObject("provinceInfos",provinceInfos);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         return modelAndView;
-
-
-
-
     }
     @RequestMapping("/testRun")
     public String testRun(){
