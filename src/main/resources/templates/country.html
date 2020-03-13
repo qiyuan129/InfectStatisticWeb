@@ -17,8 +17,12 @@
     <div class="myRow">
         <div class="col-md-12">
             <h1 class="myH1">新型冠状肺炎</h1>
-            <p>全国实时动态</p>
-            <p>空昂实时数据</p>
+            <h3 class="myH3">疫情实时报告</h3>
+            <label for="selectDate">选择日期：</label>
+            <input id="selectDate" type="date" value="2020-03-13"/>
+            <script>
+                var selectDate = $("#selectDate").val();
+            </script>
             <button class="btn btn-success" type="submit">Button</button>
         </div>
     </div>
@@ -29,10 +33,13 @@
         <table></table>
     </div>
 
-    <div >
-        <h1 class="myH1">全国疫情分布</h1>
+    <div class="countryPanel">
+        <div >
+            <h1 class="myH1">全国疫情分布</h1>
             <div id="china_map" class="charts"></div>
+        </div>
     </div>
+
 
 
 
@@ -45,11 +52,7 @@
 
 </div>
 
-
-
-
-
-
+</body>
 
 <script src="http://gallery.echartsjs.com/dep/echarts/map/js/china.js" charset="utf-8"></script>
 <script>
@@ -197,21 +200,7 @@
     ];
     var yData = [];//省份
     var barData = [];//状态条
-
-
-
     var option = {
-
-        /*title: [{
-            show: true,
-            text: '排名情况',
-            textStyle: {
-                color: '#521e53',
-                fontSize: 18
-            },
-            right: 180,
-            top: 100
-        }],*/
 
         tooltip: {// 鼠标移到图里面的浮动提示框
             show: true,
@@ -533,6 +522,4 @@
 
 
 </script>
-
-</body>
 </html>
