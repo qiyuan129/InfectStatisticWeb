@@ -6,6 +6,7 @@ import com.example.infect_statistic_web.model.LogList;
 import com.example.infect_statistic_web.model.Province;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -197,7 +198,7 @@ public class InfectStatistic {
         return country.getCountryTotalInfo(latestDate);
     }
 
-    public HashMap<String, DailyInfo> getProvinceLatestStatistic() {
+    public HashMap<String, DailyInfo> getProvincesLatestStatistic() {
         LocalDate latestDate;
         latestDate = logList.getEndDate();
 
@@ -208,9 +209,27 @@ public class InfectStatistic {
         return country.getCountryTotalInfo(date);
     }
 
+    public HashMap<String,DailyInfo> getProvinceStatistic(LocalDate date){
+        return country.getAllProvincesInfo(date);
+    }
+
     public DailyInfo getCountryChange(LocalDate date){
         return country.getCountryChange(date);
     }
 
+    public DailyInfo getProvinceInfo(LocalDate date,String provinceName){
+        Province province=country.getProvince(provinceName);
+        return province.getStatistic(date);
+    }
+
+    public DailyInfo getProvinceChange(LocalDate date,String provinceName){
+        Province province=country.getProvince(provinceName);
+        return province.getProvinceChange(date);
+    }
+
+    public ArrayList<DailyInfo> getProvinceAllDailyInfo(String provinceName){
+        Province province=country.getProvince(provinceName);
+        return province.getAllDailyInfo();
+    }
 
 }
