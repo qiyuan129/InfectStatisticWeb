@@ -1,7 +1,30 @@
 .charts{
-    width: 80%;height:800px;
+    width: 100%;height:800px;
     margin:0 auto;
 }
+
+.provinceCharts{
+    width: 100%;height:500px;
+    margin:0 auto;
+}
+
+.countryPanel{
+    /*作为图表的背景面板*/
+    background-color: #ffffff;
+    margin:0 auto;
+    width: 75%;
+    opacity:90%;
+}
+
+
+.provincePanel{
+    /*作为图表的背景面板*/
+    background-color: #ffffff;
+    margin:0 auto;
+    width: 75%;
+    opacity:90%;
+}
+
 
 .yabg{
     background:url("../images/bgimg.jpg") no-repeat center fixed;
@@ -15,57 +38,37 @@
 .myRow {
     display: -ms-flexbox;
     display: flex;
-    opacity:80%;
+    opacity:90%;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     margin:0 auto;
-    background-color: #384fbf;
-    width: 80%;height:200px
+    background-color: #0865fb;
+    width: 75%;height:200px
 }
 
 
 .myTextRow {
     display: -ms-flexbox;
     display: flex;
-    opacity:80%;
+    /*opacity:80%;*/
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     margin:0 auto;
     background-color: #bfbabb;
-    width: 80%;height:180px
+    width: 75%;height:180px
 }
 
 .myH1{
     text-align: center;
-    color: #c6ba1f;
+    color: #efff35;
+}
+
+
+.myH3{
+    text-align: center;
+    color: #efff35;
 }
 
 
 
 
-
-
-.css_height{
-    height: 400px;
-    margin-top: 30px;
-}
-.css_height1{
-    height: 400px;
-    margin-top: 72px;
-}
-.right_title{
-    width: 90%;
-    margin-left: 10%;
-}
-.nav>li>a{
-    padding: 5px 18px;
-    margin-top: 10px;
-}
-body{
-    background-color:#009688;
-}
-.container{
-    background-color:#dcedf5;
-    margin-top: 25px;
-    border-radius: 15px;
-}

@@ -11,32 +11,251 @@
     <script src="https://cdn.bootcss.com/echarts/3.7.1/echarts.min.js"></script>
     <script src="http://gallery.echartsjs.com/dep/echarts/map/js/china.js"></script>
 </head>
+
+
+
 <body class="yabg">
-
-<div class="myRow">
-    <div class="col-md-12">
-        <h1 class="myH1">新型冠状肺炎</h1>
-        <p>福建实时动态</p>
+<div class=".container-fluid">
+    <div class="myRow">
+        <div class="col-md-12">
+            <h1 class="myH1">新型冠状肺炎</h1>
+            <p>福建实时动态</p>
+        </div>
     </div>
+
+    <div class="myTextRow">
+        <p>总数据展示</p>
+        <p>总数据展示</p>
+        <p>总数据展示</p>
+
+        <table></table>
+    </div>
+
+
+
+    <div class="provincePanel">
+        <div >
+            <h1 class="myH1">福建省疫情详情</h1>
+            <div id="provinceChart1" class="provinceCharts"></div>
+        </div>
+    </div>
+
+
+
+
+    <div class="provincePanel">
+        <div >
+            <h1 class="myH1">福建省疫情详情</h1>
+            <div id="provinceChart2" class="provinceCharts"></div>
+
+        </div>
+    </div>>
+
+
+
+
+
+
+
+
+
+
+
 </div>
-
-<div class="myTextRow">
-    <p>总数据展示</p>
-
-    <table></table>
-</div>
-
-
-<div >
-    <h1 class="myH1">全国疫情分布</h1>
-    <div id="china_map" class="charts"></div>
-</div>
-
-
-
-
-
-
-
 </body>
+
+<script src="https://cdn.bootcss.com/echarts/3.7.1/echarts.min.js"></script>
+<script type="text/javascript">
+    var dom = document.getElementById("provinceChart1");
+    var myChart = echarts.init(dom);
+    var app = {};
+    option = null;
+    var colors = [ '#05B950','#000301'],
+
+
+        option = {
+            color: colors,
+
+            tooltip: {
+                trigger: 'none',
+                axisPointer: {
+                    type: 'cross',
+                    snap: true,
+
+                }
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            legend: {
+                data:['累计治愈','累计死亡'],
+
+            },
+            grid: {
+                top: 70,
+                bottom: 50
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    axisLine: {
+                        onZero: false,
+
+                    },
+                    axisPointer: {
+                        label: {
+                            formatter: function (params) {
+                                return  params.value+' 累计治愈'
+                                    + (params.seriesData.length ? '：' + params.seriesData[0].data : '')+
+                                    '  \n累计死亡'+(params.seriesData.length ? '：' + params.seriesData[1].data : '');
+                            }
+                        }
+                    },
+                    data: ['2-1','2-2','2-3','2-4','2-5','2-6','2-7','2-8','2-9','2-10','2-11','2-12',
+                        '2-13','2-14','2-15','2-16','2-17','2-18','2-19','2-20','2-21','2-22','2-23','2-24',
+                        '2-25','2-26','2-27','2-28','2-29']
+                }
+
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '累计治愈',
+                    type: 'line',
+                    // xAxisIndex: 1,
+                    smooth: true,
+                    data: [0,0,0,0,0,0,0,0,0,1,1,2,2,2,3,5,5,6,7,8,9,11,14,15,16,19,24,28]
+                },
+                {
+                    name: '累计死亡',
+                    type: 'line',
+                    smooth: true,
+                    data: [0,0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,2,3,3,3,4,4,4,4,4,5,6]
+                },
+                // {
+                //     name: '累计治愈',
+                //     type: 'line',
+                //     // xAxisIndex: 1,
+                //     smooth: true,
+                //     data: [2, 5, 0, 6.4, 8.7, 70.7, 175.6, 192.2, 48.7, 18.8, 6.0, 2.3]
+                // },
+                //  {
+                //     name: '累计死亡',
+                //     type: 'line',
+                //     // xAxisIndex: 1,
+                //     smooth: true,
+                //     data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 75.6, 82.2, 48.7, 18.8, 6.0, 2.3]
+                // }
+            ]
+        };
+    ;
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+</script>
+<script type="text/javascript">
+    var dom = document.getElementById("provinceChart2");
+    var myChart = echarts.init(dom);
+    var app = {};
+    option = null;
+    var colors = ['#FF8000', '#FF0000', '#05B950','#000301'],
+        option = {
+            color: colors,
+
+            tooltip: {
+                trigger: 'none',
+                axisPointer: {
+                    type: 'cross',
+                    snap: true,
+
+                }
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            legend: {
+                data:['新增确诊', '新增疑似','累计治愈','累计死亡'],
+
+            },
+            grid: {
+                top: 70,
+                bottom: 50
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    axisLine: {
+                        onZero: false,
+
+                    },
+                    axisPointer: {
+                        label: {
+                            formatter: function (params) {
+                                return  params.value+' 现有确诊'
+                                    + (params.seriesData.length ? '：' + params.seriesData[0].data : '')+
+                                    '  \n累计确诊'+(params.seriesData.length ? '：' + params.seriesData[1].data : '');
+                            }
+                        }
+                    },
+                    data: ['2-1','2-2','2-3','2-4','2-5','2-6','2-7','2-8','2-9','2-10','2-11','2-12',
+                        '2-13','2-14','2-15','2-16','2-17','2-18','2-19','2-20','2-21','2-22','2-23','2-24',
+                        '2-25','2-26','2-27','2-28','2-29']
+                }
+
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '新增确诊',
+                    type: 'line',
+                    // xAxisIndex: 1,
+                    smooth: true,
+                    data: [1,2,3,5,8,6,4,3,3,1,1,1,2,1,1,2,3,1,1,0,0,0,1,1,0,1]
+                },
+                {
+                    name: '新增疑似',
+                    type: 'line',
+                    smooth: true,
+                    data: [1,2,3,5,7,10,16,25,20,30,27,25,20,23,18,16,18,20,17,15,10,14,14,14,15,10,10,5]
+                },
+                // {
+                //     name: '累计治愈',
+                //     type: 'line',
+                //     // xAxisIndex: 1,
+                //     smooth: true,
+                //     data: [2, 5, 0, 6.4, 8.7, 70.7, 175.6, 192.2, 48.7, 18.8, 6.0, 2.3]
+                // },
+                //  {
+                //     name: '累计死亡',
+                //     type: 'line',
+                //     // xAxisIndex: 1,
+                //     smooth: true,
+                //     data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 75.6, 82.2, 48.7, 18.8, 6.0, 2.3]
+                // }
+            ]
+        };
+    ;
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+</script>
+
 </html>

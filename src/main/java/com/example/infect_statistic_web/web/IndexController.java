@@ -1,7 +1,9 @@
 package com.example.infect_statistic_web.web;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
@@ -12,10 +14,6 @@ public class IndexController {
         return "country";
     }
 
-    @RequestMapping("/test")
-    public String test(){
-        return "test";
-    }
 
     @RequestMapping("/hello")
     public String hello(){
@@ -25,5 +23,14 @@ public class IndexController {
     public String province(){
         return "province";
     }
+
+    @RequestMapping("/test")
+    public ModelAndView sayHello() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("test");
+        modelAndView.addObject("key", 12345);
+        return modelAndView;
+    }
+
 
 }
