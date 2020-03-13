@@ -98,8 +98,8 @@ public class Country {
 
         for(String provinceName:Country.PROVINCES){
             Province province=this.provincesMap.get(provinceName);
-            DailyInfo provinceInfo=province.getDailyInfoFromDate(date);
-            countryChange.add(provinceInfo);
+            DailyInfo provinceChange=province.getProvinceChange(date);
+            countryChange.add(provinceChange);
         }
 
         return countryChange;

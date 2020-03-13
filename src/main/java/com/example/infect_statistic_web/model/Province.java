@@ -13,7 +13,7 @@ public class Province {
      * 标记是否在日志中出现过
      */
     public boolean hasOccurred;
-    DailyInfo totalInfo = null;
+    //DailyInfo totalInfo = null;
 
 
     Province(String name) {
@@ -26,31 +26,42 @@ public class Province {
         dailyInfos.add(dailyInfo);
     }
 
+    /**
+     * 返回当前省份 截止到日期endDate的疫情统计数据
+     * @param endDate
+     * @return
+     */
     public DailyInfo getStatistic(LocalDate endDate) {
-        //未进行统计就计算一遍
-        if (totalInfo == null) {
-            DailyInfo totalInfo = new DailyInfo(endDate);
+        DailyInfo totalInfo = new DailyInfo(endDate);
 
-            for (DailyInfo info : dailyInfos) {
-                //只处理指定日期当天以及之前的日志
-                if (info.getDate().isBefore(endDate) || info.getDate().isEqual(endDate)) {
-                    totalInfo.add(info);
-                }
+        for (DailyInfo info : dailyInfos) {
+            //只处理指定日期当天以及之前的日志
+            if (info.getDate().isBefore(endDate) || info.getDate().isEqual(endDate)) {
+                totalInfo.add(info);
             }
-
-            this.totalInfo = totalInfo;
-            return totalInfo;
-        } else {
-            return this.totalInfo;
         }
+        return totalInfo;
     }
 
-    public DailyInfo getDailyInfoFromDate(LocalDate date){
+    /**
+     * 返回当前省份 日期date的疫情数据相较于前一天的变化
+     * @param date
+     * @return
+     */
+    public DailyInfo getProvinceChange(LocalDate date){
         for(DailyInfo info:dailyInfos){
             if(info.date.isEqual(date)){
                 return info;
             }
         }
         return null;
+    }
+
+    /**
+     * 返回当前省份记录的所有疫情数据
+     * @return
+     */
+    public ArrayList<DailyInfo> getAllDailyInfo(){
+        return dailyInfos;
     }
 }
