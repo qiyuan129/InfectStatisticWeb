@@ -1,4 +1,4 @@
-package com.example.infect_statistic_web;
+package com.example.infect_statistic_web.service;
 
 import com.example.infect_statistic_web.model.Country;
 import com.example.infect_statistic_web.model.DailyInfo;
@@ -206,6 +206,10 @@ public class InfectStatistic {
 
     public DailyInfo getCountryStatistic(LocalDate date) {
         return country.getCountryTotalInfo(date);
+    }
+
+    public DailyInfo getCountryChange(LocalDate date){
+        return country.getCountryChange(date);
     }
 
 

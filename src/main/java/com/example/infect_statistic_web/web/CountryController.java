@@ -1,18 +1,12 @@
 package com.example.infect_statistic_web.web;
 
-import com.example.infect_statistic_web.InfectStatistic;
-import com.example.infect_statistic_web.model.Country;
+import com.example.infect_statistic_web.service.InfectStatistic;
 import com.example.infect_statistic_web.model.DailyInfo;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.File;
-import java.io.IOException;
+import java.time.LocalDate;
 import java.util.HashMap;
 
 @Controller
@@ -22,13 +16,13 @@ public class CountryController {
     public ModelAndView getCountryStatistic(String dateStr){
         InfectStatistic infectInfoOperator = new InfectStatistic();
         infectInfoOperator.readLogs();
-        DailyInfo countryInfo=infectInfoOperator.getCountryLatestStatistic();
+        DailyInfo countryInfo=infectInfoOperator.getCountryChange(LocalDate.parse("2020-02-02"));
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("country");
         modelAndView.addObject("countryInfo", countryInfo);
 
-        //System.out.println(countryInfo.toString(DailyInfo.ALL_TYPES));
+        System.out.println(countryInfo.toString(DailyInfo.ALL_TYPES));
         return modelAndView;
     }
 

@@ -93,5 +93,16 @@ public class Country {
         return totalInfos;
     }
 
+    public DailyInfo getCountryChange(LocalDate date){
+        DailyInfo countryChange=new DailyInfo(date);
+
+        for(String provinceName:Country.PROVINCES){
+            Province province=this.provincesMap.get(provinceName);
+            DailyInfo provinceInfo=province.getDailyInfoFromDate(date);
+            countryChange.add(provinceInfo);
+        }
+
+        return countryChange;
+    }
 
 }

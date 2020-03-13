@@ -44,4 +44,13 @@ public class Province {
             return this.totalInfo;
         }
     }
+
+    public DailyInfo getDailyInfoFromDate(LocalDate date){
+        for(DailyInfo info:dailyInfos){
+            if(info.date.isEqual(date)){
+                return info;
+            }
+        }
+        return null;
+    }
 }
