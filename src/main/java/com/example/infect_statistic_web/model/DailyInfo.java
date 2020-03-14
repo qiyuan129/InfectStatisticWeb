@@ -6,12 +6,12 @@ import java.time.LocalDate;
  * 记录某一天的各项人数（总数或变化）
  */
 public class DailyInfo {
-    LocalDate date;
+    public LocalDate date;
     public static String[] ALL_TYPES = {"ip", "sp", "cure", "dead"};
-    int infected;
-    int suspected;
-    int dead;
-    int cured;
+    public int infected;
+    public int suspected;
+    public int dead;
+    public int cured;
 
     public DailyInfo(LocalDate date) {
         this.date = date;
