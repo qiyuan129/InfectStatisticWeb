@@ -1,5 +1,6 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>全国数据</title>
@@ -7,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <!--你自己写的样式文件，尽量不要放在bootstrap.min.css之前-->
-    <link href="/css/mycss.css" rel="stylesheet">
+    <link href="css/mycss.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/echarts/3.7.1/echarts.min.js"></script>
     <script src="http://gallery.echartsjs.com/dep/echarts/map/js/china.js"></script>
 
@@ -16,29 +17,89 @@
 <body class="yabg">
 
 <div class=".container-fluid">
+    <script>
+        var myData=[];//数据存放处
+        var countryInfo =5;
+        var countryChange;
+        $.ajax({
+            type : "get",
+            async : true,            //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+            url: 'localhost:808/countryInfos',//请求数据的地址
+            data : {},
+            dataType : "json",        //返回数据形式为json
+            success : function(result) {
+                //请求成功时执行该函数内容，result即为服务器返回的json对象
+
+                if (result) {
+                    countryInfo=JSON.parse(result[0]);
+                    countryChange=JSON.parse(result[1]);
+                    myData=result[2];
+                }
+            },
+            error : function(errorMsg) {
+                //请求失败时执行该函数
+                alert("数据请求失败！");
+            }
+        });//end ajax
+
+    </script>
+
+
+
+
+
+
     <div class="myRow">
         <div class="col-md-12">
             <h1 class="myH1">新型冠状肺炎</h1>
             <h3 class="myH3">疫情实时报告</h3>
+
+            <div>
+                <script>
+                    document.write(countryInfo + "<br>");
+                </script>
+            </div>
+
+
+            <form action="/example/html5/demo_form.asp" method="get">
+                <input type="date" name="user_date" />
+                <input type="submit" />
+            </form>
             <label for="selectDate">选择日期：</label>
             <input id="selectDate" type="date" value="2020-03-13"/>
             <script>
                 var selectDate = $("#selectDate").val();
             </script>
+
             <button class="btn btn-success" type="submit">Button</button>
         </div>
     </div>
 
-    <div class="myTextRow" id="test11">
-       <!-- <script>
-            var name='${myMap}';
-            document.getElementById("test11").innerHTML=name;
-        </script>-->
+    <div class="myTextRow">
+
+        <table width="100%">
+            <tr>
+                <td align="center"><p class="myP" >现有确诊</p></td>
+                <td align="center"><p class="myP">现有疑似</p></td>
+                <td align="center"><p class="myP">现有重症</p></td>
+                <td align="center"><p class="myP">累计治愈</p></td>
+            </tr>
+            <tr>
+                <td align="center"><p class="num1">522</p></td>
+                <td align="center"><p class="num2">585</p></td>
+                <td align="center"><p class="num3">585</p></td>
+                <td align="center"><p class="num4">585</p></td>
+            </tr>
+        </table>
+
     </div>
 
+
+    <div>
+        <h1 class="myH1">新冠确诊分布</h1>
+    </div>
     <div class="countryPanel">
         <div >
-            <h1 class="myH1">全国疫情分布</h1>
             <div id="china_map" class="charts"></div>
         </div>
     </div>
@@ -46,222 +107,231 @@
 
 
 
-    <div class="myRow">
-        <div class="col-md-12">
-            <p>尾</p>
-        </div>
+    <div>
+        <h1 class="myH1">全国疫情快讯</h1>
+    </div>
+    <div class="myTextRow">
+        <h3>疫情</h3>
+        <P>
+            17:50:55
+            每人在各自独立设计、实现软件的过程中不免要犯这样那样的错误。在结对编程中,因为有随时的复审和交流,程序各方面的质量取决于一对程序员中各方面水平较高的那一位。这样,程序中的错误就会少得多,程序的初始质量会高很多,这样会省下很多以后修改、测试的时间。具体地说,结对编程有如下的好处: 1. 在开发层次,结对编程能提供更好的设计质量和代码质量,两人合作解决问题的能力更强。
+            2. 对开发人员自身来说,结对工作能带来更多的信心,高质量的产出能带来更高的满足感。
+            3. 在企业管理层次上,结对能更有效地交流,相互学习和传递经验,分享知识, 能更好地应对人员流动。
+            总之,如果运用得当,结对编程可以取得更高的投入产出比
+
+            19:33:02
+            1. 团队有一致的集体目标,团队要一起完成这目标。一个团队的成员不一定要同时工作,例如接力赛跑。(王屋村搬砖的“非团队”成员则不然,每个人想搬多少就搬多少,不想干了就结算工钱走人。) 2. 团队成员有各自的分工,互相依赖合作,共同完成任务。(王屋村搬砖的“非团队”成员则是各自行动,独立把任务完成,有人不辞而别,对其他的搬砖人无实质影响。)
+
+            19:47:14
+            业余剧团模式(Amateur Theater Team) 这样的团队在每一个项目(剧目)中,不同的人会挑选不同的角色。在下一个剧目中,这些人也许会换一个完全不同的角色类型。各人在团队中听从一个中央指挥(导演)的指导和安排。在学生实践项目或培训项目中,这样的事情经常发生。
+            5.2.5 秘密团队(Skunk Work Team) 一些软件项目在秘密状态下进行,别人不知道他们具体在做什么。苹果公司1980 年代在研发Macin-tosh之后的系统时,就有两三个团队在不同时期进入秘密状态开发。21世纪的一些创业团队也是处于类似状态。这种模式的好处是:团队内部有极大的自由,没有外界的干扰(不用每周给别人介绍项目进展,听领导的最新指示,等等),团队成员有极大的投入。
+            5.2.6 特工团队(SWAT) 就像电影电视中的特工组《加里森敢死队》等一样,软件行业的一些团队由一些有特殊技能的专业人士组成,负责解决一些棘手而有紧迫性的问题。例如2000年之前,很多公司都需要专业人士去解决Y2K问题。这些团队成员必须了解传统语言和老式系统,才能胜任这样的任务。现在还有一些专门做网站安全性服务的团队,也属于这一类型。
+        </P>
     </div>
 
+    <div class="myTextRow">
+        <h3>疫情2</h3>
+        <P>
+            17:50:55
+            每人在各自独立设计、实现软件的过程中不免要犯这样那样的错误。在结对编程中,因为有随时的复审和交流,程序各方面的质量取决于一对程序员中各方面水平较高的那一位。这样,程序中的错误就会少得多,程序的初始质量会高很多,这样会省下很多以后修改、测试的时间。具体地说,结对编程有如下的好处: 1. 在开发层次,结对编程能提供更好的设计质量和代码质量,两人合作解决问题的能力更强。
+            2. 对开发人员自身来说,结对工作能带来更多的信心,高质量的产出能带来更高的满足感。
+            3. 在企业管理层次上,结对能更有效地交流,相互学习和传递经验,分享知识, 能更好地应对人员流动。
+            总之,如果运用得当,结对编程可以取得更高的投入产出比
+
+            19:33:02
+            1. 团队有一致的集体目标,团队要一起完成这目标。一个团队的成员不一定要同时工作,例如接力赛跑。(王屋村搬砖的“非团队”成员则不然,每个人想搬多少就搬多少,不想干了就结算工钱走人。) 2. 团队成员有各自的分工,互相依赖合作,共同完成任务。(王屋村搬砖的“非团队”成员则是各自行动,独立把任务完成,有人不辞而别,对其他的搬砖人无实质影响。)
+
+            19:47:14
+            业余剧团模式(Amateur Theater Team) 这样的团队在每一个项目(剧目)中,不同的人会挑选不同的角色。在下一个剧目中,这些人也许会换一个完全不同的角色类型。各人在团队中听从一个中央指挥(导演)的指导和安排。在学生实践项目或培训项目中,这样的事情经常发生。
+            5.2.5 秘密团队(Skunk Work Team) 一些软件项目在秘密状态下进行,别人不知道他们具体在做什么。苹果公司1980 年代在研发Macin-tosh之后的系统时,就有两三个团队在不同时期进入秘密状态开发。21世纪的一些创业团队也是处于类似状态。这种模式的好处是:团队内部有极大的自由,没有外界的干扰(不用每周给别人介绍项目进展,听领导的最新指示,等等),团队成员有极大的投入。
+            5.2.6 特工团队(SWAT) 就像电影电视中的特工组《加里森敢死队》等一样,软件行业的一些团队由一些有特殊技能的专业人士组成,负责解决一些棘手而有紧迫性的问题。例如2000年之前,很多公司都需要专业人士去解决Y2K问题。这些团队成员必须了解传统语言和老式系统,才能胜任这样的任务。现在还有一些专门做网站安全性服务的团队,也属于这一类型。
+        </P>
+    </div>
+
+    <div class="myTextRow">
+        <h3>疫情3</h3>
+        <P>
+            17:50:55
+            每人在各自独立设计、实现软件的过程中不免要犯这样那样的错误。在结对编程中,因为有随时的复审和交流,程序各方面的质量取决于一对程序员中各方面水平较高的那一位。这样,程序中的错误就会少得多,程序的初始质量会高很多,这样会省下很多以后修改、测试的时间。具体地说,结对编程有如下的好处: 1. 在开发层次,结对编程能提供更好的设计质量和代码质量,两人合作解决问题的能力更强。
+            2. 对开发人员自身来说,结对工作能带来更多的信心,高质量的产出能带来更高的满足感。
+            3. 在企业管理层次上,结对能更有效地交流,相互学习和传递经验,分享知识, 能更好地应对人员流动。
+            总之,如果运用得当,结对编程可以取得更高的投入产出比
+
+            19:33:02
+            1. 团队有一致的集体目标,团队要一起完成这目标。一个团队的成员不一定要同时工作,例如接力赛跑。(王屋村搬砖的“非团队”成员则不然,每个人想搬多少就搬多少,不想干了就结算工钱走人。) 2. 团队成员有各自的分工,互相依赖合作,共同完成任务。(王屋村搬砖的“非团队”成员则是各自行动,独立把任务完成,有人不辞而别,对其他的搬砖人无实质影响。)
+
+            19:47:14
+            业余剧团模式(Amateur Theater Team) 这样的团队在每一个项目(剧目)中,不同的人会挑选不同的角色。在下一个剧目中,这些人也许会换一个完全不同的角色类型。各人在团队中听从一个中央指挥(导演)的指导和安排。在学生实践项目或培训项目中,这样的事情经常发生。
+            5.2.5 秘密团队(Skunk Work Team) 一些软件项目在秘密状态下进行,别人不知道他们具体在做什么。苹果公司1980 年代在研发Macin-tosh之后的系统时,就有两三个团队在不同时期进入秘密状态开发。21世纪的一些创业团队也是处于类似状态。这种模式的好处是:团队内部有极大的自由,没有外界的干扰(不用每周给别人介绍项目进展,听领导的最新指示,等等),团队成员有极大的投入。
+            5.2.6 特工团队(SWAT) 就像电影电视中的特工组《加里森敢死队》等一样,软件行业的一些团队由一些有特殊技能的专业人士组成,负责解决一些棘手而有紧迫性的问题。例如2000年之前,很多公司都需要专业人士去解决Y2K问题。这些团队成员必须了解传统语言和老式系统,才能胜任这样的任务。现在还有一些专门做网站安全性服务的团队,也属于这一类型。
+        </P>
+
+    </div>
+
+    <div class="mybar"/>
 
 </div>
 
-
-
-<script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts-en.common.js"></script>
-<div id="main" style="width: 600px;height:400px;border:1px dashed #000;"></div>
-<script type="text/javascript">
-    $(document).ready(function(){
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main'));
-        //数据加载完之前先显示一段简单的loading动画
-        myChart.showLoading();
-        var names=[];    //横坐标数组（实际用来盛放X轴坐标值）
-        var values=[];    //纵坐标数组（实际用来盛放Y坐标值）
-        $.ajax({
-            type : "get",
-            async : true,            //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
-            url: '/countryInfos',//请求数据的地址
-            data : {},
-            dataType : "json",        //返回数据形式为json
-            success : function(result) {
-                //请求成功时执行该函数内容，result即为服务器返回的json对象
-                if (result) {
-                    for(var i=0;i<result.length;i++){
-                        names.push(result[i].name);
-                        values.push(result[i].value);
-                        console.info(result[i].name);
-                    }
-                    myChart.hideLoading();    //隐藏加载动画
-                    myChart.setOption({        //加载数据图表
-                        tooltip: {},
-                        legend: {
-                            data:['薪资']
-                        },
-                        xAxis: {
-                            data: names
-                        },
-                        yAxis: {
-                            type: 'value'
-                        },
-                        series: [{
-                            // 根据名字对应到相应的系列
-                            name: '薪资',//薪资 series not exists. Legend data should be same with series name or data name.
-                            type: 'bar',
-                            data: values
-                        }]
-                    });
-                }
-            },
-            error : function(errorMsg) {
-                //请求失败时执行该函数
-                alert("图表请求数据失败!");
-                myChart.hideLoading();
-            }
-        });//end ajax
-    });
-
-</script>
-
 </body>
-
-
-
-
-
-
-
-
-<!--
 
 <script src="http://gallery.echartsjs.com/dep/echarts/map/js/china.js" charset="utf-8"></script>
 <script>
-
-    var myDate = new Date();
     var china_chart = echarts.init(document.getElementById('china_map'));
-    ////////////////////////
-    //var mapDataJson='${mapDataJson}';
-    //var json=JSON.parse(mapDataJson);
-
-    //var data='${myMap}';
-
-    ///////////////////
-
-    //数据
-
-    var data = [
+    /*var data = [
         {
             name: '江苏',
-            value: 135
+            value: 135,
+            inf: 135
         },
         {
             name: '北京',
-            value: 157
+            value: 157,
+            inf: 135
         },
         {
             name: '上海',
-            value: 58
+            value: 58,
+            inf: 135
         },
         {
             name: '重庆',
-            value: 186
+            value: 186,
+            inf: 135
         },
         {
             name: '河北',
-            value: 37
+            value: 37,
+            inf: 135
         },
         {
             name: '河南',
-            value: 187
+            value: 187,
+            inf: 135
         },
         {
             name: '云南',
-            value: 22
+            value: 22,
+            inf: 135
         },
         {
             name: '辽宁',
-            value: 24
+            value: 24,
+            inf: 135
         },
         {
             name: '黑龙江',
-            value: 198
+            value: 198,
+            inf: 135
         },
         {
             name: '湖南',
-            value: 209
+            value: 209,
+            inf: 135
         },
         {
             name: '安徽',
-            value: 197
+            value: 197,
+            inf: 135
         },
         {
             name: '山东',
-            value: 365
-        },
-        {
-            name: '新疆',
-            value: 31
+            value: 365,
+            inf: 135
         },
         {
             name: '江苏',
-            value: 135
+            value: 135,
+            inf: 135
         },
         {
             name: '浙江',
-            value: 277
+            value: 277,
+            inf: 135
         },
         {
             name: '江西',
-            value: 179
+            value: 179,
+            inf: 135
+        },
+        {
+            name: '新疆',
+            value: 31,
+            inf: 135
         },
         {
             name: '湖北',
-            value: 39625
+            value: 39625,
+            inf: 135
         },
         {
             name: '广西',
-            value: 88
+            value: 88,
+            inf: 135
         },
         {
             name: '甘肃',
-            value: 8
+            value: 8,
+            inf: 135
         },
         {
             name: '山西',
-            value: 29
+            value: 29,
+            inf: 135
         },
         {
             name: '内蒙古',
-            value: 36
+            value: 36,
+            inf: 135
         },
         {
             name: '陕西',
-            value: 50
+            value: 50,
+            inf: 135
         },
         {
             name: '吉林',
-            value: 25
+            value: 25,
+            inf: 135
         },
         {
             name: '福建',
-            value: 67
+            value: 67,
+            inf: 135
         },
         {
             name: '贵州',
-            value: 32
+            value: 32,
+            inf: 135
         },
         {
             name: '广东',
-            value: 444
+            value: 444,
+            inf: 135
         },
         {
             name: '青海',
-            value: 0
+            value: 0,
+            inf: 135
         },
         {
             name: '西藏',
-            value: 0
+            value: 0,
+            inf: 135
         },
         {
             name: '四川',
-            value: 210
+            value: 210,
+            inf: 135
         },
         {
             name: '宁夏',
-            value: 4
+            value: 4,
+            inf: 135
         },
         {
             name: '海南',
-            value: 32
+            value: 32,
+            inf: 135
         },
         {
             name: '台湾',
@@ -269,13 +339,15 @@
         },
         {
             name: '香港',
-            value: 66
+            value: 66,
+            inf: 135
         },
         {
             name: '澳门',
-            value: 3
+            value: 3,
+            inf: 135
         }
-    ];
+    ];*/
 
     var yData = [];//省份
     var barData = [];//状态条
@@ -413,7 +485,7 @@
                 label: {
                     show: false,
                 },
-                data: data
+                data: myData
             },
 
             {//最右边的条形图
@@ -462,7 +534,6 @@
         ]
     };
 
-
     china_chart.on('click', function (param){
         var selected = param.name;
         if (selected) {
@@ -473,6 +544,8 @@
                 case '云南':
                     location.href = "requestProvince?province=云南";
                     break;
+                case '西藏':
+                    location.href = "requestProvince?province=西藏";
                 case '新疆':
                     location.href = "requestProvince?province=新疆";
                     break;
@@ -574,12 +647,10 @@
     });
     china_chart.setOption(option);
 
+
+
+
 </script>
--->
-
-
-
-
 </html>
 
 

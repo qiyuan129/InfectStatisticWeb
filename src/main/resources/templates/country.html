@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>全国数据</title>
@@ -7,7 +7,7 @@
     <!-- Bootstrap CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <!--你自己写的样式文件，尽量不要放在bootstrap.min.css之前-->
-    <link href="/css/mycss.css" rel="stylesheet">
+    <link href="css/mycss.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/echarts/3.7.1/echarts.min.js"></script>
     <script src="http://gallery.echartsjs.com/dep/echarts/map/js/china.js"></script>
 
@@ -20,34 +20,57 @@
         <div class="col-md-12">
             <h1 class="myH1">新型冠状肺炎</h1>
             <h3 class="myH3">疫情实时报告</h3>
+            <form action="/example/html5/demo_form.asp" method="get">
+                <input type="date" name="user_date" />
+                <input type="submit" />
+            </form>
             <label for="selectDate">选择日期：</label>
             <input id="selectDate" type="date" value="2020-03-13"/>
             <script>
                 var selectDate = $("#selectDate").val();
             </script>
+
             <button class="btn btn-success" type="submit">Button</button>
         </div>
     </div>
 
     <div class="myTextRow">
-        <table width="100%">
+      <!--  <table width="100%">
             <tr>
                 <td>
                    <div>
-                       <p style="width: 100%;height: 45px;display: block;line-height: 45px;text-align: center;">现有确诊</p>
+                       <p class="myP">现有确诊</p><br/>
+                       <p class="myP">现有确诊</p>
                    </div>
                 </td>
                 <td>
                     <div>
-                        <p class="myp">现有疑似</p>
+                        <p class="myp">现有疑似</p><br/>
+                        <p class="myP">现有确诊</p>
                     </div>
                 </td>
                 <td>
-                    <p class="myp">现有重症</p>
+                    <p class="myp">现有重症</p><br/>
+                    <p class="myP">现有确诊</p>
                 </td>
                 <td>
-                    <p class="myp">累计治愈</p>
+                    <p class="myp">累计治愈</p><br/>
+                    <p class="myP">现有确诊</p>
                 </td>
+            </tr>
+        </table>-->
+        <table width="100%">
+            <tr>
+                <td align="center"><p class="myP" >现有确诊</p></td>
+                <td align="center"><p class="myP">现有疑似</p></td>
+                <td align="center"><p class="myP">现有重症</p></td>
+                <td align="center"><p class="myP">累计治愈</p></td>
+            </tr>
+            <tr>
+                <td align="center"><p class="num1">522</p></td>
+                <td align="center"><p class="num2">585</p></td>
+                <td align="center"><p class="num3">585</p></td>
+                <td align="center"><p class="num4">585</p></td>
             </tr>
         </table>
     </div>
@@ -126,6 +149,7 @@
 
     </div>
 
+    <div class="mybar"/>
 
 </div>
 
@@ -462,7 +486,6 @@
         ]
     };
 
-
     china_chart.on('click', function (param){
         var selected = param.name;
         if (selected) {
@@ -473,6 +496,8 @@
                 case '云南':
                     location.href = "requestProvince?province=云南";
                     break;
+                case '西藏':
+                    location.href = "requestProvince?province=西藏";
                 case '新疆':
                     location.href = "requestProvince?province=新疆";
                     break;

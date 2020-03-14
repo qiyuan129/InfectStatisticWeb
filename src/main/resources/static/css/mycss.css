@@ -22,7 +22,7 @@
     background-color: #ffffff;
     margin:0 auto;
     width: 75%;
-    opacity:90%;
+    opacity:95%;
 }
 
 
@@ -62,7 +62,7 @@
 
 .myH1{
     text-align: center;
-    color: #efff35;
+    color: #ffab38;
 }
 
 
@@ -72,8 +72,39 @@
 }
 
 .myP{
-    text-align: center;
+    font-size:200%;
 }
 
+.num1{
+    font-size:200%;
+    color: #ff551b;
+    font-style: italic;
+    font-weight: bold;
+}
+.num2{
+    font-size:200%;
+    color: #bfa038;
+    font-style: italic;
+    font-weight: bold;
+}
 
+.num3{
+    font-size:200%;
+    color: #ff0000;
+    font-style: italic;
+    font-weight: bold;
+}
+.num4{
+    font-size:200%;
+    color: #0fbf25;
+    font-style: italic;
+    font-weight: bold;
+}
 
+.myTd{
+    align:center
+}
+
+.mybar{
+    width: 75%;height:50px
+}
