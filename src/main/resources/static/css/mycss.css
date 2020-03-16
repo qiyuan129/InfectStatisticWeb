@@ -109,6 +109,13 @@
 }
 
 
-.myInput{
-    width: 75%;height:800px
+.myTextArea{
+    width: 75%;height:500px
+}
+
+
+.update{
+    width:50px;
+    width:120px;
+    color: #35bf5d;
 }
