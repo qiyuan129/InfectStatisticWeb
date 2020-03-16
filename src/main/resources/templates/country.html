@@ -20,14 +20,15 @@
         <div class="col-md-12">
             <h1 class="myH1">新型冠状肺炎</h1>
             <h3 class="myH3">疫情实时报告</h3>
+            <a href="/articles">进入文章管理界面</a>
 <!--            <form action="/example/html5/demo_form.asp" method="get">-->
 <!--                <input type="date" name="user_date" />-->
 <!--                <input type="submit" />-->
 <!--            </form>-->
-            <label th:text="'选择要查看的日期,当前日期:'+${statistic.date}"></label>
-            <form action="/test2" method="get">
-                <input type="date" name="newDate" value=""/>
-                <input type="submit" />
+            <label th:text="'下方可修改数据截止日期(只能请求在日志记录范围内的信息),当前日期:'+${statistic.date}"></label>
+            <form action="/country" method="get">
+                <input type="date" name="newDate" th:value="${statistic.date}"/>
+                <input type="submit" value="修改截止日期"/>
             </form>
 
         </div>
@@ -48,10 +49,10 @@
                 <td align="center"><p class="num4" th:text="${statistic.cured}"></p></td>
             </tr>
             <tr>
-                <td align="center">较昨日<p class="num12" th:text="${statistic.infected}"></p></td>
-                <td align="center">较昨日<p class="num22" th:text="${statistic.suspected}"></p></td>
-                <td align="center">较昨日<p class="num32" th:text="${statistic.dead}"></p></td>
-                <td align="center">较昨日<p class="num42" th:text="${statistic.cured}"></p></td>
+                <td align="center">较昨日新增<p class="num12" th:text="${change.infected}"></p></td>
+                <td align="center">较昨日新增<p class="num22" th:text="${change.suspected}"></p></td>
+                <td align="center">较昨日新增<p class="num32" th:text="${change.dead}"></p></td>
+                <td align="center">较昨日新增<p class="num42" th:text="${change.cured}"></p></td>
             </tr>
 
         </table>
@@ -73,63 +74,32 @@
     <div>
         <h1 class="myH1">全国疫情快讯</h1>
     </div>
-    <div class="myTextRow">
-        <h3>疫情</h3>
-        <P>
-            17:50:55
-            每人在各自独立设计、实现软件的过程中不免要犯这样那样的错误。在结对编程中,因为有随时的复审和交流,程序各方面的质量取决于一对程序员中各方面水平较高的那一位。这样,程序中的错误就会少得多,程序的初始质量会高很多,这样会省下很多以后修改、测试的时间。具体地说,结对编程有如下的好处: 1. 在开发层次,结对编程能提供更好的设计质量和代码质量,两人合作解决问题的能力更强。
-            2. 对开发人员自身来说,结对工作能带来更多的信心,高质量的产出能带来更高的满足感。
-            3. 在企业管理层次上,结对能更有效地交流,相互学习和传递经验,分享知识, 能更好地应对人员流动。
-            总之,如果运用得当,结对编程可以取得更高的投入产出比
-
-            19:33:02
-            1. 团队有一致的集体目标,团队要一起完成这目标。一个团队的成员不一定要同时工作,例如接力赛跑。(王屋村搬砖的“非团队”成员则不然,每个人想搬多少就搬多少,不想干了就结算工钱走人。) 2. 团队成员有各自的分工,互相依赖合作,共同完成任务。(王屋村搬砖的“非团队”成员则是各自行动,独立把任务完成,有人不辞而别,对其他的搬砖人无实质影响。)
-
-            19:47:14
-            业余剧团模式(Amateur Theater Team) 这样的团队在每一个项目(剧目)中,不同的人会挑选不同的角色。在下一个剧目中,这些人也许会换一个完全不同的角色类型。各人在团队中听从一个中央指挥(导演)的指导和安排。在学生实践项目或培训项目中,这样的事情经常发生。
-            5.2.5 秘密团队(Skunk Work Team) 一些软件项目在秘密状态下进行,别人不知道他们具体在做什么。苹果公司1980 年代在研发Macin-tosh之后的系统时,就有两三个团队在不同时期进入秘密状态开发。21世纪的一些创业团队也是处于类似状态。这种模式的好处是:团队内部有极大的自由,没有外界的干扰(不用每周给别人介绍项目进展,听领导的最新指示,等等),团队成员有极大的投入。
-            5.2.6 特工团队(SWAT) 就像电影电视中的特工组《加里森敢死队》等一样,软件行业的一些团队由一些有特殊技能的专业人士组成,负责解决一些棘手而有紧迫性的问题。例如2000年之前,很多公司都需要专业人士去解决Y2K问题。这些团队成员必须了解传统语言和老式系统,才能胜任这样的任务。现在还有一些专门做网站安全性服务的团队,也属于这一类型。
-        </P>
+    <div class="myTextRow" th:each="article:${articles}">
+        <h3 th:text="${article.title}"></h3>
+        <br>
+        <p th:text="${article.content}"></p>
     </div>
 
-    <div class="myTextRow">
-        <h3>疫情2</h3>
-        <P>
-            17:50:55
-            每人在各自独立设计、实现软件的过程中不免要犯这样那样的错误。在结对编程中,因为有随时的复审和交流,程序各方面的质量取决于一对程序员中各方面水平较高的那一位。这样,程序中的错误就会少得多,程序的初始质量会高很多,这样会省下很多以后修改、测试的时间。具体地说,结对编程有如下的好处: 1. 在开发层次,结对编程能提供更好的设计质量和代码质量,两人合作解决问题的能力更强。
-            2. 对开发人员自身来说,结对工作能带来更多的信心,高质量的产出能带来更高的满足感。
-            3. 在企业管理层次上,结对能更有效地交流,相互学习和传递经验,分享知识, 能更好地应对人员流动。
-            总之,如果运用得当,结对编程可以取得更高的投入产出比
+<!--    <div class="myTextRow">-->
+<!--        <h3>疫情2</h3>-->
+<!--        <P>-->
+<!--            17:50:55-->
+<!--            每人在各自独立设计、实现软件的过程中不免要犯这样那样的错误。在结对编程中,因为有随时的复审和交流,程序各方面的质量取决于一对程序员中各方面水平较高的那一位。这样,程序中的错误就会少得多,程序的初始质量会高很多,这样会省下很多以后修改、测试的时间。具体地说,结对编程有如下的好处: 1. 在开发层次,结对编程能提供更好的设计质量和代码质量,两人合作解决问题的能力更强。-->
+<!--            2. 对开发人员自身来说,结对工作能带来更多的信心,高质量的产出能带来更高的满足感。-->
+<!--            3. 在企业管理层次上,结对能更有效地交流,相互学习和传递经验,分享知识, 能更好地应对人员流动。-->
+<!--            总之,如果运用得当,结对编程可以取得更高的投入产出比-->
 
-            19:33:02
-            1. 团队有一致的集体目标,团队要一起完成这目标。一个团队的成员不一定要同时工作,例如接力赛跑。(王屋村搬砖的“非团队”成员则不然,每个人想搬多少就搬多少,不想干了就结算工钱走人。) 2. 团队成员有各自的分工,互相依赖合作,共同完成任务。(王屋村搬砖的“非团队”成员则是各自行动,独立把任务完成,有人不辞而别,对其他的搬砖人无实质影响。)
+<!--            19:33:02-->
+<!--            1. 团队有一致的集体目标,团队要一起完成这目标。一个团队的成员不一定要同时工作,例如接力赛跑。(王屋村搬砖的“非团队”成员则不然,每个人想搬多少就搬多少,不想干了就结算工钱走人。) 2. 团队成员有各自的分工,互相依赖合作,共同完成任务。(王屋村搬砖的“非团队”成员则是各自行动,独立把任务完成,有人不辞而别,对其他的搬砖人无实质影响。)-->
 
-            19:47:14
-            业余剧团模式(Amateur Theater Team) 这样的团队在每一个项目(剧目)中,不同的人会挑选不同的角色。在下一个剧目中,这些人也许会换一个完全不同的角色类型。各人在团队中听从一个中央指挥(导演)的指导和安排。在学生实践项目或培训项目中,这样的事情经常发生。
-            5.2.5 秘密团队(Skunk Work Team) 一些软件项目在秘密状态下进行,别人不知道他们具体在做什么。苹果公司1980 年代在研发Macin-tosh之后的系统时,就有两三个团队在不同时期进入秘密状态开发。21世纪的一些创业团队也是处于类似状态。这种模式的好处是:团队内部有极大的自由,没有外界的干扰(不用每周给别人介绍项目进展,听领导的最新指示,等等),团队成员有极大的投入。
-            5.2.6 特工团队(SWAT) 就像电影电视中的特工组《加里森敢死队》等一样,软件行业的一些团队由一些有特殊技能的专业人士组成,负责解决一些棘手而有紧迫性的问题。例如2000年之前,很多公司都需要专业人士去解决Y2K问题。这些团队成员必须了解传统语言和老式系统,才能胜任这样的任务。现在还有一些专门做网站安全性服务的团队,也属于这一类型。
-        </P>
-    </div>
+<!--            19:47:14-->
+<!--            业余剧团模式(Amateur Theater Team) 这样的团队在每一个项目(剧目)中,不同的人会挑选不同的角色。在下一个剧目中,这些人也许会换一个完全不同的角色类型。各人在团队中听从一个中央指挥(导演)的指导和安排。在学生实践项目或培训项目中,这样的事情经常发生。-->
+<!--            5.2.5 秘密团队(Skunk Work Team) 一些软件项目在秘密状态下进行,别人不知道他们具体在做什么。苹果公司1980 年代在研发Macin-tosh之后的系统时,就有两三个团队在不同时期进入秘密状态开发。21世纪的一些创业团队也是处于类似状态。这种模式的好处是:团队内部有极大的自由,没有外界的干扰(不用每周给别人介绍项目进展,听领导的最新指示,等等),团队成员有极大的投入。-->
+<!--            5.2.6 特工团队(SWAT) 就像电影电视中的特工组《加里森敢死队》等一样,软件行业的一些团队由一些有特殊技能的专业人士组成,负责解决一些棘手而有紧迫性的问题。例如2000年之前,很多公司都需要专业人士去解决Y2K问题。这些团队成员必须了解传统语言和老式系统,才能胜任这样的任务。现在还有一些专门做网站安全性服务的团队,也属于这一类型。-->
+<!--        </P>-->
+<!--    </div>-->
 
-    <div class="myTextRow">
-        <h3>疫情3</h3>
-        <P>
-            17:50:55
-            每人在各自独立设计、实现软件的过程中不免要犯这样那样的错误。在结对编程中,因为有随时的复审和交流,程序各方面的质量取决于一对程序员中各方面水平较高的那一位。这样,程序中的错误就会少得多,程序的初始质量会高很多,这样会省下很多以后修改、测试的时间。具体地说,结对编程有如下的好处: 1. 在开发层次,结对编程能提供更好的设计质量和代码质量,两人合作解决问题的能力更强。
-            2. 对开发人员自身来说,结对工作能带来更多的信心,高质量的产出能带来更高的满足感。
-            3. 在企业管理层次上,结对能更有效地交流,相互学习和传递经验,分享知识, 能更好地应对人员流动。
-            总之,如果运用得当,结对编程可以取得更高的投入产出比
 
-            19:33:02
-            1. 团队有一致的集体目标,团队要一起完成这目标。一个团队的成员不一定要同时工作,例如接力赛跑。(王屋村搬砖的“非团队”成员则不然,每个人想搬多少就搬多少,不想干了就结算工钱走人。) 2. 团队成员有各自的分工,互相依赖合作,共同完成任务。(王屋村搬砖的“非团队”成员则是各自行动,独立把任务完成,有人不辞而别,对其他的搬砖人无实质影响。)
-
-            19:47:14
-            业余剧团模式(Amateur Theater Team) 这样的团队在每一个项目(剧目)中,不同的人会挑选不同的角色。在下一个剧目中,这些人也许会换一个完全不同的角色类型。各人在团队中听从一个中央指挥(导演)的指导和安排。在学生实践项目或培训项目中,这样的事情经常发生。
-            5.2.5 秘密团队(Skunk Work Team) 一些软件项目在秘密状态下进行,别人不知道他们具体在做什么。苹果公司1980 年代在研发Macin-tosh之后的系统时,就有两三个团队在不同时期进入秘密状态开发。21世纪的一些创业团队也是处于类似状态。这种模式的好处是:团队内部有极大的自由,没有外界的干扰(不用每周给别人介绍项目进展,听领导的最新指示,等等),团队成员有极大的投入。
-            5.2.6 特工团队(SWAT) 就像电影电视中的特工组《加里森敢死队》等一样,软件行业的一些团队由一些有特殊技能的专业人士组成,负责解决一些棘手而有紧迫性的问题。例如2000年之前,很多公司都需要专业人士去解决Y2K问题。这些团队成员必须了解传统语言和老式系统,才能胜任这样的任务。现在还有一些专门做网站安全性服务的团队,也属于这一类型。
-        </P>
-
-    </div>
 
     <div class="mybar"/>
 
@@ -480,105 +450,105 @@
         if (selected) {
             switch(selected){
                 case '四川':
-                    location.href = "test1?provinceName=四川";
+                    location.href = "province?provinceName=四川";
                     break;
                 case '云南':
-                    location.href = "test1?provinceName=云南";
+                    location.href = "province?provinceName=云南";
                     break;
                 case '西藏':
-                    location.href = "test1?provinceName=西藏";
+                    location.href = "province?provinceName=西藏";
                 case '新疆':
-                    location.href = "test1?provinceName=新疆";
+                    location.href = "province?provinceName=新疆";
                     break;
                 case '青海':
-                    location.href = "test1?provinceName=青海";
+                    location.href = "province?provinceName=青海";
                     break;
                 case '宁夏':
-                    location.href = "test1?provinceName=宁夏";
+                    location.href = "province?provinceName=宁夏";
                     break;
                 case '甘肃':
-                    location.href = "test1?provinceName=甘肃";
+                    location.href = "province?provinceName=甘肃";
                     break;
                 case '内蒙古':
-                    location.href = "test1?provinceName=内蒙古";
+                    location.href = "province?provinceName=内蒙古";
                     break;
                 case '陕西':
-                    location.href = "test1?provinceName=陕西";
+                    location.href = "province?provinceName=陕西";
                     break;
                 case '山西':
-                    location.href = "test1?provinceName=山西";
+                    location.href = "province?provinceName=山西";
                     break;
                 case '重庆':
-                    location.href = "test1?provinceName=重庆";
+                    location.href = "province?provinceName=重庆";
                     break;
                 case '贵州':
-                    location.href = "test1?provinceName=贵州";
+                    location.href = "province?provinceName=贵州";
                     break;
                 case '广西':
-                    location.href = "test1?provinceName=广西";
+                    location.href = "province?provinceName=广西";
                     break;
                 case '海南':
-                    location.href = "test1?provinceName=河南";
+                    location.href = "province?provinceName=河南";
                     break;
                 case '广东':
-                    location.href = "test1?provinceName=广东";
+                    location.href = "province?provinceName=广东";
                     break;
                 case '湖南':
-                    location.href = "test1?provinceName=湖南";
+                    location.href = "province?provinceName=湖南";
                     break;
                 case '湖北':
-                    location.href = "test1?provinceName=湖北";
+                    location.href = "province?provinceName=湖北";
                     break;
                 case '河南':
-                    location.href = "test1?provinceName=河南";
+                    location.href = "province?provinceName=河南";
                     break;
                 case '河北':
-                    location.href = "test1?provinceName=河北";
+                    location.href = "province?provinceName=河北";
                     break;
                 case '北京':
-                    location.href = "test1?provinceName=北京";
+                    location.href = "province?provinceName=北京";
                     break;
                 case '天津':
-                    location.href = "test1?provinceName=天津";
+                    location.href = "province?provinceName=天津";
                     break;
                 case '黑龙江':
-                    location.href = "test1?provinceName=黑龙江";
+                    location.href = "province?provinceName=黑龙江";
                     break;
                 case '吉林':
-                    location.href = "test1?provinceName=吉林";
+                    location.href = "province?provinceName=吉林";
                     break;
                 case '辽宁':
-                    location.href = "test1?provinceName=辽宁";
+                    location.href = "province?provinceName=辽宁";
                     break;
                 case '山东':
-                    location.href = "test1?provinceName=山东";
+                    location.href = "province?provinceName=山东";
                     break;
                 case '江苏':
-                    location.href = "test1?provinceName=江苏";
+                    location.href = "province?provinceName=江苏";
                     break;
                 case '安徽':
-                    location.href = "test1?provinceName=安徽";
+                    location.href = "province?provinceName=安徽";
                     break;
                 case '上海':
-                    location.href = "test1?provinceName=上海";
+                    location.href = "province?provinceName=上海";
                     break;
                 case '浙江':
-                    location.href = "test1?provinceName=浙江";
+                    location.href = "province?provinceName=浙江";
                     break;
                 case '福建':
-                    location.href = "test1?provinceName=福建";
+                    location.href = "province?provinceName=福建";
                     break;
                 case '江西':
-                    location.href = "test1?provinceName=江西";
+                    location.href = "province?provinceName=江西";
                     break;
                 case '台湾':
-                    location.href = "test1?provinceName=台湾";
+                    location.href = "province?provinceName=台湾";
                     break;
                 case '香港':
-                    location.href = "test1?provinceName=香港";
+                    location.href = "province?provinceName=香港";
                     break;
                 case '澳门':
-                    location.href = "test1?provinceName=澳门";
+                    location.href = "province?provinceName=澳门";
                     break;
                 default:
                     break;

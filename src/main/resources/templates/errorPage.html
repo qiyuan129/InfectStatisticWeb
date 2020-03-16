@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>错误</title>
@@ -11,8 +11,8 @@
 </script>
 
 <div>
-    <p class="errorText">
-        您产生了错误操作
+    <p class="errorText" th:text="${message}">
+        错误原因：有可能是请求地日期超出了疫情日志记录地范围
     </p>
 </div>
 </body>

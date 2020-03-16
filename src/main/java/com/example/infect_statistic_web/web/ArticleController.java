@@ -33,6 +33,7 @@ public class ArticleController {
         }
         map.addAttribute("tags",localRepository.getTags());
         map.addAttribute("articles",localRepository.getList(tag));
+        map.addAttribute("tag",tag);
         return "articleList";
     }
 

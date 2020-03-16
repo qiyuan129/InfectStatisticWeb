@@ -6,8 +6,11 @@
 </head>
 <body>
 <h1>文章列表————后台</h1>
+<h3 th:if="${tag==null}">当前文章分类:全国</h3>
+<h3 th:if="${tag!=null}"  th:text="'当前文章分类：'+${tag}"></h3>
+<a href="/country">返回全国疫情界面</a>
 <div class="mybar">
-    <label>文章标签</label>
+    <label>点击下方按钮切换查看的文章标签</label>
     <form action="/articles" method="get">
         <select name="tag">
             <option th:each="tag:${tags}"  th:value="${tag}" th:text="${tag}"></option>
@@ -24,7 +27,7 @@
     <li th:each="article:${articles}">
         <div class="myTextRow">
             <h3 th:text="${article.title}"></h3>
-            <h6 th:text="${article.tag}"></h6>
+            <h6 th:text="'分类（标签）:'+${article.tag}"></h6>
             <p th:text="${article.content}"></p>
             <form action="/article/delete" method="post">
                 <!--<input type="submit" name="article" value="titleName" />-->
