@@ -50,7 +50,6 @@
 .myTextRow {
     display: -ms-flexbox;
     display: flex;
-    /*opacity:80%;*/
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     margin:0 auto;
