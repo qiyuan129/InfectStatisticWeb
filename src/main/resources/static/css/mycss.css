@@ -142,6 +142,10 @@
 .mybar{
     width: 75%;height:50px
 }
+.mySpaceBar{
+    width: 100%;
+    height:20px;
+}
 
 
 .myTextArea{
@@ -164,9 +168,9 @@
 
 .mytextP{
     max-width:100%;
-    text-overflow:ellipsis;//超出显示...
-    overflow:hidden;//超过显示省略号
-    word-wrap:break-word;//自动换行
+    text-overflow:ellipsis;
+    overflow:hidden;
+    word-wrap:break-word;
     word-break: break-all;
 
 
