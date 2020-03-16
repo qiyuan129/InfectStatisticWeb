@@ -30,7 +30,7 @@ public class InfectStatistic {
     /**
      * 统计时会用到的对象
      */
-    private LogList logList = new LogList();
+    private LogList logList ;
     private Country country;
 
     /**
@@ -38,7 +38,7 @@ public class InfectStatistic {
      *
      */
     public InfectStatistic() {
-
+        logList=new LogList();
         //设置resources文件夹下的logs文件夹为数据来源
         Resource resource = new ClassPathResource("logs");
         File sourceFile = null;
@@ -60,6 +60,8 @@ public class InfectStatistic {
      * 从输入路径读取日志
      */
     public void readLogs() {
+        //Province对象都是在单例的Country中创建的，所以每次读取前要清空Province类中原有的数据
+        country.clearProvinceData();
         logList.readLogsFromPath(inputPath);
     }
 
@@ -160,5 +162,13 @@ public class InfectStatistic {
         dataList.add(provinceChange);
         dataList.add(chartData);
         return dataList;
+    }
+
+    /**
+     * 获取日志文件中的最后一天
+     * @return
+     */
+    public LocalDate getEndDate(){
+        return logList.getEndDate();
     }
 }

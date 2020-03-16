@@ -20,58 +20,34 @@
         <div class="col-md-12">
             <h1 class="myH1">新型冠状肺炎</h1>
             <h3 class="myH3">疫情实时报告</h3>
-            <form action="/example/html5/demo_form.asp" method="get">
-                <input type="date" name="user_date" />
+<!--            <form action="/example/html5/demo_form.asp" method="get">-->
+<!--                <input type="date" name="user_date" />-->
+<!--                <input type="submit" />-->
+<!--            </form>-->
+            <label th:text="'选择要查看的日期,当前日期:'+${statistic.date}"></label>
+            <form action="/test2" method="get">
+                <input type="date" name="newDate" value=""/>
                 <input type="submit" />
             </form>
-            <label for="selectDate">选择日期：</label>
-            <input id="selectDate" type="date" value="2020-03-13"/>
-            <script>
-                var selectDate = $("#selectDate").val();
-            </script>
 
-            <button class="btn btn-success" type="submit">Button</button>
         </div>
     </div>
 
     <div class="myTextRow">
-      <!--  <table width="100%">
-            <tr>
-                <td>
-                   <div>
-                       <p class="myP">现有确诊</p><br/>
-                       <p class="myP">现有确诊</p>
-                   </div>
-                </td>
-                <td>
-                    <div>
-                        <p class="myp">现有疑似</p><br/>
-                        <p class="myP">现有确诊</p>
-                    </div>
-                </td>
-                <td>
-                    <p class="myp">现有重症</p><br/>
-                    <p class="myP">现有确诊</p>
-                </td>
-                <td>
-                    <p class="myp">累计治愈</p><br/>
-                    <p class="myP">现有确诊</p>
-                </td>
-            </tr>
-        </table>-->
         <table width="100%">
             <tr>
-                <td align="center"><p class="myP" >现有确诊</p></td>
+                <td align="center"><p class="myP">现有确诊</p></td>
                 <td align="center"><p class="myP">现有疑似</p></td>
-                <td align="center"><p class="myP">现有重症</p></td>
+                <td align="center"><p class="myP">累计死亡</p></td>
                 <td align="center"><p class="myP">累计治愈</p></td>
             </tr>
             <tr>
-                <td align="center"><p class="num1">522</p></td>
-                <td align="center"><p class="num2">585</p></td>
-                <td align="center"><p class="num3">585</p></td>
-                <td align="center"><p class="num4">585</p></td>
+                <td align="center"><p class="num1" th:text="${statistic.infected}"></p></td>
+                <td align="center"><p class="num2" th:text="${statistic.suspected}"></p></td>
+                <td align="center"><p class="num3" th:text="${statistic.dead}"></p></td>
+                <td align="center"><p class="num4" th:text="${statistic.cured}"></p></td>
             </tr>
+
         </table>
     </div>
 
@@ -155,151 +131,156 @@
 
 </body>
 
+<script th:inline="javascript">
+    console.log([[${mapData}]]);
+</script>
+
 <script src="http://gallery.echartsjs.com/dep/echarts/map/js/china.js" charset="utf-8"></script>
-<script>
+<script th:inline="javascript">
 
     var myDate = new Date();
     var china_chart = echarts.init(document.getElementById('china_map'));
     //var mapDataJson='${mapDataJson}';
     //数据纯属虚构
-    var data = [
-        {
-            name: '江苏',
-            value: 135
-        },
-        {
-            name: '北京',
-            value: 157
-        },
-        {
-            name: '上海',
-            value: 58
-        },
-        {
-            name: '重庆',
-            value: 186
-        },
-        {
-            name: '河北',
-            value: 37
-        },
-        {
-            name: '河南',
-            value: 187
-        },
-        {
-            name: '云南',
-            value: 22
-        },
-        {
-            name: '辽宁',
-            value: 24
-        },
-        {
-            name: '黑龙江',
-            value: 198
-        },
-        {
-            name: '湖南',
-            value: 209
-        },
-        {
-            name: '安徽',
-            value: 197
-        },
-        {
-            name: '山东',
-            value: 365
-        },
-        {
-            name: '江苏',
-            value: 135
-        },
-        {
-            name: '浙江',
-            value: 277
-        },
-        {
-            name: '江西',
-            value: 179
-        },
-        {
-            name: '新疆',
-            value: 31
-        },
-        {
-            name: '湖北',
-            value: 39625
-        },
-        {
-            name: '广西',
-            value: 88
-        },
-        {
-            name: '甘肃',
-            value: 8
-        },
-        {
-            name: '山西',
-            value: 29
-        },
-        {
-            name: '内蒙古',
-            value: 36
-        },
-        {
-            name: '陕西',
-            value: 50
-        },
-        {
-            name: '吉林',
-            value: 25
-        },
-        {
-            name: '福建',
-            value: 67
-        },
-        {
-            name: '贵州',
-            value: 32
-        },
-        {
-            name: '广东',
-            value: 444
-        },
-        {
-            name: '青海',
-            value: 0
-        },
-        {
-            name: '西藏',
-            value: 0
-        },
-        {
-            name: '四川',
-            value: 210
-        },
-        {
-            name: '宁夏',
-            value: 4
-        },
-        {
-            name: '海南',
-            value: 32
-        },
-        {
-            name: '台湾',
-            value: 26
-        },
-        {
-            name: '香港',
-            value: 66
-        },
-        {
-            name: '澳门',
-            value: 3
-        }
-    ];
+    var data =[[${mapData}]]
+    //     [
+    //     {
+    //         name: '江苏',
+    //         value: 135
+    //     },
+    //     {
+    //         name: '北京',
+    //         value: 157
+    //     },
+    //     {
+    //         name: '上海',
+    //         value: 58
+    //     },
+    //     {
+    //         name: '重庆',
+    //         value: 186
+    //     },
+    //     {
+    //         name: '河北',
+    //         value: 37
+    //     },
+    //     {
+    //         name: '河南',
+    //         value: 187
+    //     },
+    //     {
+    //         name: '云南',
+    //         value: 22
+    //     },
+    //     {
+    //         name: '辽宁',
+    //         value: 24
+    //     },
+    //     {
+    //         name: '黑龙江',
+    //         value: 198
+    //     },
+    //     {
+    //         name: '湖南',
+    //         value: 209
+    //     },
+    //     {
+    //         name: '安徽',
+    //         value: 197
+    //     },
+    //     {
+    //         name: '山东',
+    //         value: 365
+    //     },
+    //     {
+    //         name: '江苏',
+    //         value: 135
+    //     },
+    //     {
+    //         name: '浙江',
+    //         value: 277
+    //     },
+    //     {
+    //         name: '江西',
+    //         value: 179
+    //     },
+    //     {
+    //         name: '新疆',
+    //         value: 31
+    //     },
+    //     {
+    //         name: '湖北',
+    //         value: 39625
+    //     },
+    //     {
+    //         name: '广西',
+    //         value: 88
+    //     },
+    //     {
+    //         name: '甘肃',
+    //         value: 8
+    //     },
+    //     {
+    //         name: '山西',
+    //         value: 29
+    //     },
+    //     {
+    //         name: '内蒙古',
+    //         value: 36
+    //     },
+    //     {
+    //         name: '陕西',
+    //         value: 50
+    //     },
+    //     {
+    //         name: '吉林',
+    //         value: 25
+    //     },
+    //     {
+    //         name: '福建',
+    //         value: 67
+    //     },
+    //     {
+    //         name: '贵州',
+    //         value: 32
+    //     },
+    //     {
+    //         name: '广东',
+    //         value: 444
+    //     },
+    //     {
+    //         name: '青海',
+    //         value: 0
+    //     },
+    //     {
+    //         name: '西藏',
+    //         value: 0
+    //     },
+    //     {
+    //         name: '四川',
+    //         value: 210
+    //     },
+    //     {
+    //         name: '宁夏',
+    //         value: 4
+    //     },
+    //     {
+    //         name: '海南',
+    //         value: 32
+    //     },
+    //     {
+    //         name: '台湾',
+    //         value: 26
+    //     },
+    //     {
+    //         name: '香港',
+    //         value: 66
+    //     },
+    //     {
+    //         name: '澳门',
+    //         value: 3
+    //     }
+    // ];
 
     var yData = [];//省份
     var barData = [];//状态条
@@ -308,7 +289,9 @@
         tooltip: {// 鼠标移到图里面的浮动提示框
             show: true,
             formatter: function(params) {
-                return params.name + '：' + params.data['value'] +"人"
+                return params.name + '：\n' +"感染"+ params.data['value'] +"人"+
+                        "疑似"+params.data['suspected']+"人\n"+
+                        "死亡"+params.data['dead']+"人\n";
             },
         },
 
@@ -491,105 +474,105 @@
         if (selected) {
             switch(selected){
                 case '四川':
-                    location.href = "requestProvince?province=四川";
+                    location.href = "test1?provinceName=四川";
                     break;
                 case '云南':
-                    location.href = "requestProvince?province=云南";
+                    location.href = "test1?provinceName=云南";
                     break;
                 case '西藏':
-                    location.href = "requestProvince?province=西藏";
+                    location.href = "test1?provinceName=西藏";
                 case '新疆':
-                    location.href = "requestProvince?province=新疆";
+                    location.href = "test1?provinceName=新疆";
                     break;
                 case '青海':
-                    location.href = "requestProvince?province=青海";
+                    location.href = "test1?provinceName=青海";
                     break;
                 case '宁夏':
-                    location.href = "requestProvince?province=宁夏";
+                    location.href = "test1?provinceName=宁夏";
                     break;
                 case '甘肃':
-                    location.href = "requestProvince?province=甘肃";
+                    location.href = "test1?provinceName=甘肃";
                     break;
                 case '内蒙古':
-                    location.href = "requestProvince?province=内蒙古";
+                    location.href = "test1?provinceName=内蒙古";
                     break;
                 case '陕西':
-                    location.href = "requestProvince?province=陕西";
+                    location.href = "test1?provinceName=陕西";
                     break;
                 case '山西':
-                    location.href = "requestProvince?province=山西";
+                    location.href = "test1?provinceName=山西";
                     break;
                 case '重庆':
-                    location.href = "requestProvince?province=重庆";
+                    location.href = "test1?provinceName=重庆";
                     break;
                 case '贵州':
-                    location.href = "requestProvince?province=贵州";
+                    location.href = "test1?provinceName=贵州";
                     break;
                 case '广西':
-                    location.href = "requestProvince?province=广西";
+                    location.href = "test1?provinceName=广西";
                     break;
                 case '海南':
-                    location.href = "requestProvince?province=河南";
+                    location.href = "test1?provinceName=河南";
                     break;
                 case '广东':
-                    location.href = "requestProvince?province=广东";
+                    location.href = "test1?provinceName=广东";
                     break;
                 case '湖南':
-                    location.href = "requestProvince?province=湖南";
+                    location.href = "test1?provinceName=湖南";
                     break;
                 case '湖北':
-                    location.href = "requestProvince?province=湖北";
+                    location.href = "test1?provinceName=湖北";
                     break;
                 case '河南':
-                    location.href = "requestProvince?province=河南";
+                    location.href = "test1?provinceName=河南";
                     break;
                 case '河北':
-                    location.href = "requestProvince?province=河北";
+                    location.href = "test1?provinceName=河北";
                     break;
                 case '北京':
-                    location.href = "requestProvince?province=北京";
+                    location.href = "test1?provinceName=北京";
                     break;
                 case '天津':
-                    location.href = "requestProvince?province=天津";
+                    location.href = "test1?provinceName=天津";
                     break;
                 case '黑龙江':
-                    location.href = "requestProvince?province=黑龙江";
+                    location.href = "test1?provinceName=黑龙江";
                     break;
                 case '吉林':
-                    location.href = "requestProvince?province=吉林";
+                    location.href = "test1?provinceName=吉林";
                     break;
                 case '辽宁':
-                    location.href = "requestProvince?province=辽宁";
+                    location.href = "test1?provinceName=辽宁";
                     break;
                 case '山东':
-                    location.href = "requestProvince?province=山东";
+                    location.href = "test1?provinceName=山东";
                     break;
                 case '江苏':
-                    location.href = "requestProvince?province=江苏";
+                    location.href = "test1?provinceName=江苏";
                     break;
                 case '安徽':
-                    location.href = "requestProvince?province=安徽";
+                    location.href = "test1?provinceName=安徽";
                     break;
                 case '上海':
-                    location.href = "requestProvince?province=上海";
+                    location.href = "test1?provinceName=上海";
                     break;
                 case '浙江':
-                    location.href = "requestProvince?province=浙江";
+                    location.href = "test1?provinceName=浙江";
                     break;
                 case '福建':
-                    location.href = "requestProvince?province=福建";
+                    location.href = "test1?provinceName=福建";
                     break;
                 case '江西':
-                    location.href = "requestProvince?province=江西";
+                    location.href = "test1?provinceName=江西";
                     break;
                 case '台湾':
-                    location.href = "requestProvince?province=台湾";
+                    location.href = "test1?provinceName=台湾";
                     break;
                 case '香港':
-                    location.href = "requestProvince?province=香港";
+                    location.href = "test1?provinceName=香港";
                     break;
                 case '澳门':
-                    location.href = "requestProvince?province=澳门";
+                    location.href = "test1?provinceName=澳门";
                     break;
                 default:
                     break;

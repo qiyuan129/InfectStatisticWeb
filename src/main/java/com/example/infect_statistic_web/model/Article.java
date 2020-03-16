@@ -5,7 +5,11 @@ import java.time.LocalDate;
 public class Article {
     int idCount=0;
     int id;
-    String title;
+    String title;   //标题
+    String comment;  //内容
+    String tag;    //标签，用于归类，如全国/福建/湖北等
+    LocalDate lastUpdateTime;    //最后更新时间
+
 
     public Article(){
         id=++idCount;
@@ -17,14 +21,6 @@ public class Article {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
     }
 
     public String getComment() {
@@ -51,10 +47,7 @@ public class Article {
         this.lastUpdateTime = lastUpdateTime;
     }
 
-    String summary;
-    String comment;
-    String tag;
-    LocalDate lastUpdateTime;
+
 
 
 

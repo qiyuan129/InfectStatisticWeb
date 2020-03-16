@@ -19,9 +19,14 @@
     </properties>
 
     <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.tomcat.embed</groupId>-->
+<!--            <artifactId>tomcat-embed-jasper</artifactId>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-jasper</artifactId>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.51</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>

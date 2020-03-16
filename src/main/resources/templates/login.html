@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>全国数据</title>
+    <script type ="text/javascript"src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <!--你自己写的样式文件，尽量不要放在bootstrap.min.css之前-->
+
     <link href="css/mycss.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/echarts/3.7.1/echarts.min.js"></script>
     <script src="http://gallery.echartsjs.com/dep/echarts/map/js/china.js"></script>
@@ -17,32 +19,38 @@
 <body class="yabg">
 
 <div class=".container-fluid">
-    <script>
+  <!--  <script>
         var myData=[];//数据存放处
         var countryInfo =5;
         var countryChange;
-        $.ajax({
-            type : "get",
-            async : true,            //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
-            url: 'localhost:808/countryInfos',//请求数据的地址
-            data : {},
-            dataType : "json",        //返回数据形式为json
-            success : function(result) {
-                //请求成功时执行该函数内容，result即为服务器返回的json对象
+       function datt() {
+           $.ajax({
+               type : "get",
+               async : true,            //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+               url: 'http://localhost:8080/countryInfos',//请求数据的地址
+               data : {},
+               dataType : "json",        //返回数据形式为json
+               success : function(result) {
+                   //请求成功时执行该函数内容，result即为服务器返回的json对象
 
-                if (result) {
-                    countryInfo=JSON.parse(result[0]);
-                    countryChange=JSON.parse(result[1]);
-                    myData=result[2];
-                }
-            },
-            error : function(errorMsg) {
-                //请求失败时执行该函数
-                alert("数据请求失败！");
-            }
-        });//end ajax
+                   if (result) {
 
-    </script>
+                       var obj = eval("("+result[0]+")");
+                       countryInfo=eval("("+obj+")");
+
+                       countryChange=JSON.parse(result[1]);
+                       myData=result[2];
+                   }
+               },
+               error : function(errorMsg) {
+                   //请求失败时执行该函数
+                   alert("数据请求失败！");
+               }
+           });//end ajax
+           
+       }
+
+    </script>-->
 
 
 
@@ -55,9 +63,9 @@
             <h3 class="myH3">疫情实时报告</h3>
 
             <div>
-                <script>
-                    document.write(countryInfo + "<br>");
-                </script>
+               <!-- <script>
+                    document.write(countryInfo.infected + "<br>");
+                </script>-->
             </div>
 
 
@@ -349,6 +357,34 @@
         }
     ];*/
 
+    var url2='history.json';
+    var requst2=new XMLHttpRequest();
+    var mapData;
+    requst2.open('get',url2);
+    requst2.send(null);
+    var historyjson ;	 ////
+    requst2.onreadystatechange=function()
+    {
+        if (requst2.status == 200 && requst2.readyState == 4 ) {
+            historyjson = JSON.parse(requst2.responseText);
+
+            mapData=new Array();
+            for(var i in historyjson){
+                var province=historyjson[i];   //键值对
+                var item=new Object();
+                item.name=province['name'];
+                item.value=province['value'];
+                item.infected=province['infected'];
+                item.suspected=province['suspected'];
+                mapData.push(item);
+            }
+            //Console.log(JSON.stringify(mapData));
+             //mapData=JSON.stringify(historyjson);
+        }
+
+    }
+
+
     var yData = [];//省份
     var barData = [];//状态条
     var option = {
@@ -356,7 +392,7 @@
         tooltip: {// 鼠标移到图里面的浮动提示框
             show: true,
             formatter: function(params) {
-                return params.name + '：' + params.data['value'] +"人"
+                return params.name + '：' + params.data['infected'] +"人"
             },
         },
 
@@ -485,8 +521,9 @@
                 label: {
                     show: false,
                 },
-                data: myData
-            },
+                data:JSON.stringify(mapData)
+
+    },
 
             {//最右边的条形图
                 name: 'barSer',

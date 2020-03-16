@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
 <head>
     <meta charset="UTF-8">
     <title>省份详情</title>
@@ -10,11 +10,25 @@
     <link href="/css/mycss.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/echarts/3.7.1/echarts.min.js"></script>
     <script src="http://gallery.echartsjs.com/dep/echarts/map/js/china.js"></script>
+    <script th:inline="javascript" >
+        // var h1=document.getElementById("testHead");
+        // var Xdatas=[[${Xdata}]];
+
+        // for(var i in Xdatas){
+        //     Console.log(Xdatas[i]);
+        // }
+        // Console.log([[${Xdata}]]);
+        // Console.log([[${infected}]]);
+        // Console.log([[${suspected}]]);
+        // Console.log("新增感染"+[[${change.infected}]]);
+        // Console.log("新增疑似"+[[${change.suspected}]])
+    </script>
 </head>
 
 
 
 <body class="yabg">
+<h1 id="testHead"></h1>
 <div class=".container-fluid">
     <div class="myRow">
         <div class="col-md-12">
@@ -28,7 +42,7 @@
             <tr>
                 <td align="center"><p class="myP" >现有确诊</p></td>
                 <td align="center"><p class="myP">现有疑似</p></td>
-                <td align="center"><p class="myP">现有重症</p></td>
+                <td align="center"><p class="myP">累计死亡</p></td>
                 <td align="center"><p class="myP">累计治愈</p></td>
             </tr>
             <tr>
@@ -41,7 +55,7 @@
     </div>
 
 
-    <h1 class="myH1">累计治愈/死亡</h1>
+    <h1 class="myH1">新增治愈/死亡</h1>
     <div class="provincePanel">
         <div >
             <div id="provinceChart1" class="provinceCharts"></div>
@@ -113,7 +127,7 @@
 </body>
 
 <script src="https://cdn.bootcss.com/echarts/3.7.1/echarts.min.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
     var dom = document.getElementById("provinceChart1");
     var myChart = echarts.init(dom);
     var app = {};
@@ -164,9 +178,10 @@
                             }
                         }
                     },
-                    data: ['2-1','2-2','2-3','2-4','2-5','2-6','2-7','2-8','2-9','2-10','2-11','2-12',
-                        '2-13','2-14','2-15','2-16','2-17','2-18','2-19','2-20','2-21','2-22','2-23','2-24',
-                        '2-25','2-26','2-27','2-28','2-29']
+                    data:[[${Xdata}]]
+                        // ['2-1','2-2','2-3','2-4','2-5','2-6','2-7','2-8','2-9','2-10','2-11','2-12',
+                        // '2-13','2-14','2-15','2-16','2-17','2-18','2-19','2-20','2-21','2-22','2-23','2-24',
+                        // '2-25','2-26','2-27','2-28','2-29']
                 }
 
             ],
@@ -177,17 +192,19 @@
             ],
             series: [
                 {
-                    name: '累计治愈',
+                    name: '新增治愈',
                     type: 'line',
                     // xAxisIndex: 1,
                     smooth: true,
-                    data: [0,0,0,0,0,0,0,0,0,1,1,2,2,2,3,5,5,6,7,8,9,11,14,15,16,19,24,28]
+                    data:[[${cured}]]
+                        // [0,0,0,0,0,0,0,0,0,1,1,2,2,2,3,5,5,6,7,8,9,11,14,15,16,19,24,28]
                 },
                 {
-                    name: '累计死亡',
+                    name: '新增死亡',
                     type: 'line',
                     smooth: true,
-                    data: [0,0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,2,3,3,3,4,4,4,4,4,5,6]
+                    data:[[${dead}]]
+                        // [0,0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,2,3,3,3,4,4,4,4,4,5,6]
                 },
                 // {
                 //     name: '累计治愈',
@@ -210,7 +227,7 @@
         myChart.setOption(option, true);
     }
 </script>
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
     var dom = document.getElementById("provinceChart2");
     var myChart = echarts.init(dom);
     var app = {};
@@ -253,15 +270,16 @@
                     axisPointer: {
                         label: {
                             formatter: function (params) {
-                                return  params.value+' 现有确诊'
+                                return  params.value+' 新增确诊'
                                     + (params.seriesData.length ? '：' + params.seriesData[0].data : '')+
-                                    '  \n累计确诊'+(params.seriesData.length ? '：' + params.seriesData[1].data : '');
+                                    '  \n新增疑似'+(params.seriesData.length ? '：' + params.seriesData[1].data : '');
                             }
                         }
                     },
-                    data: ['2-1','2-2','2-3','2-4','2-5','2-6','2-7','2-8','2-9','2-10','2-11','2-12',
-                        '2-13','2-14','2-15','2-16','2-17','2-18','2-19','2-20','2-21','2-22','2-23','2-24',
-                        '2-25','2-26','2-27','2-28','2-29']
+                    data: [[${Xdata}]]
+                        // ['2-1','2-2','2-3','2-4','2-5','2-6','2-7','2-8','2-9','2-10','2-11','2-12',
+                        // '2-13','2-14','2-15','2-16','2-17','2-18','2-19','2-20','2-21','2-22','2-23','2-24',
+                        // '2-25','2-26','2-27','2-28','2-29']
                 }
 
             ],
@@ -276,13 +294,15 @@
                     type: 'line',
                     // xAxisIndex: 1,
                     smooth: true,
-                    data: [1,2,3,5,8,6,4,3,3,1,1,1,2,1,1,2,3,1,1,0,0,0,1,1,0,1]
+                    data: [[${infected}]]
+                        // [1,2,3,5,8,6,4,3,3,1,1,1,2,1,1,2,3,1,1,0,0,0,1,1,0,1]
                 },
                 {
                     name: '新增疑似',
                     type: 'line',
                     smooth: true,
-                    data: [1,2,3,5,7,10,16,25,20,30,27,25,20,23,18,16,18,20,17,15,10,14,14,14,15,10,10,5]
+                    data: [[${suspected}]]
+                        //[1,2,3,5,7,10,16,25,20,30,27,25,20,23,18,16,18,20,17,15,10,14,14,14,15,10,10,5]
                 },
                 // {
                 //     name: '累计治愈',

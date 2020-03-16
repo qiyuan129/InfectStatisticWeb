@@ -56,6 +56,13 @@ public class Country {
         }
     }
 
+    public void clearProvinceData(){
+        for(String provinceName:PROVINCES){
+            Province province=provincesMap.get(provinceName);
+            province.deleteInfos();
+        }
+    }
+
     /**
      * 获得全国截止到指定日期的疫情情况
      *

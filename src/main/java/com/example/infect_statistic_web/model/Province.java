@@ -64,4 +64,7 @@ public class Province {
     public ArrayList<DailyInfo> getAllDailyInfo(){
         return dailyInfos;
     }
+    public void deleteInfos(){
+        dailyInfos.clear();
+    }
 }
