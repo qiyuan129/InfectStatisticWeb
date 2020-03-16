@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>文章列表————后台</h1>
+<div class="mybar">
+    <label>文章标签</label>
+    <form action="/articles" method="get">
+        <select name="tag">
+            <option th:each="tag:${tags}"  th:value="${tag}" th:text="${tag}"></option>
+        </select>
+        <input type="submit" value="切换标签"/>
+    </form>
+    <br/>
+    <form action="/article/add" method="get">
+        <button type="submit" style="background-color:greenyellow">添加文章</button>
+    </form>
+</div>
+
+<ol >
+    <li th:each="article:${articles}">
+        <div class="myTextRow">
+            <h3 th:text="${article.title}"></h3>
+            <h6 th:text="${article.tag}"></h6>
+            <p th:text="${article.content}"></p>
+            <form action="/article/delete" method="post">
+                <!--<input type="submit" name="article" value="titleName" />-->
+                <input type="hidden" name="id" th:value="${article.id}"/>
+                <input type="hidden" name="tag" th:value="${article.tag}"/>
+                <button type="submit" name="delete" value="titleName">删除</button>
+            </form>
+
+        </div>
+    </li>
+
+<!--    <li>-->
+<!--        <div class="myTextRow">-->
+<!--            <h3>-->
+<!--                标题-->
+<!--            </h3>-->
+<!--            <h6>-->
+<!--                标签-->
+<!--            </h6>-->
+<!--            <p>-->
+<!--                文章内容-->
+<!--            </p>-->
+<!--            <form action="/login" method="get">-->
+<!--                &lt;!&ndash;<input type="submit" name="article" value="titleName" />&ndash;&gt;-->
+<!--                <button type="submit" name="delete" value="titleName">删除</button>-->
+<!--                <button type="submit" name="update" value="titleName">修改</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </li>-->
+
+
+<!--    <li>-->
+<!--        <div class="myTextRow">-->
+<!--            <h3>-->
+<!--                标题-->
+<!--            </h3>-->
+<!--            <p>-->
+<!--                文章内容-->
+<!--            </p>-->
+<!--            <form action="/login" method="get">-->
+<!--                &lt;!&ndash;<input type="submit" name="article" value="titleName" />&ndash;&gt;-->
+<!--                <button type="submit" name="delete" value="titleName">删除</button>-->
+<!--                <button type="submit" name="update" value="titleName">修改</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </li>-->
+</ol>
+
+
+</body>
+</html>
