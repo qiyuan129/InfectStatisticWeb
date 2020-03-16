@@ -56,7 +56,7 @@
     word-wrap: break-word;/*自动换行*/
     overflow:hidden;/*超出部分隐藏*/
     background-color: #fffefd;
-    width: 75%;height:180px
+    width: 75%;height:220px
 }
 
 .myH1{
@@ -80,9 +80,25 @@
     font-style: italic;
     font-weight: bold;
 }
+
+.num12{
+    font-size:100%;
+    color: #ffa225;
+    font-style: italic;
+    font-weight: bold;
+}
+
+
 .num2{
     font-size:200%;
     color: #bfa038;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.num22{
+    font-size:100%;
+    color: #bcbf40;
     font-style: italic;
     font-weight: bold;
 }
@@ -93,12 +109,30 @@
     font-style: italic;
     font-weight: bold;
 }
+
+
+.num32{
+    font-size:100%;
+    color: #ff6162;
+    font-style: italic;
+    font-weight: bold;
+}
+
 .num4{
     font-size:200%;
     color: #0fbf25;
     font-style: italic;
     font-weight: bold;
 }
+
+
+.num42{
+    font-size:100%;
+    color: #71bf6d;
+    font-style: italic;
+    font-weight: bold;
+}
+
 
 .myTd{
     align:center
@@ -109,6 +143,18 @@
 }
 
 
-.myInput{
-    width: 75%;height:800px
+.myTextArea{
+    width: 75%;height:500px
+}
+
+
+.update{
+    width:50px;
+    width:120px;
+    color: #35bf5d;
+}
+
+.errorText{
+    color: #bf161a;
+    font-size:200%;
 }

@@ -8,12 +8,14 @@
 <body>
 <div>
     <div>
-        <form action="/login" method="get">
+        <form action="/updateArticleFec" method="post">
             <!--<input type="submit" name="article" value="titleName" />-->
             标题：<input type="text" name="title" value="标题"/>
             标签<input type="text" name="tag" value="标签"/>
-            <input  class="myInput" type="text" name="comment" value="文章内容"/>
-            <input type="submit" value="提交修改">
+            <br/>
+            <textarea class="myTextArea" name="comment" value="文章内容"></textarea>
+            <br/>
+            <input class="update" type="submit" value="提交修改">
 
         </form>
     </div>
