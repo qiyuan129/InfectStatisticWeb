@@ -55,6 +55,7 @@
     margin:0 auto;
     word-wrap: break-word;/*自动换行*/
     overflow:hidden;/*超出部分隐藏*/
+    word-break:break-all;
     background-color: #fffefd;
     width: 75%;height:220px
 }
@@ -144,7 +145,8 @@
 
 
 .myTextArea{
-    width: 75%;height:500px
+    width: 75%;
+    height:500px
 }
 
 
@@ -157,4 +159,15 @@
 .errorText{
     color: #bf161a;
     font-size:200%;
+}
+
+
+.mytextP{
+    max-width:100%;
+    text-overflow:ellipsis;//超出显示...
+    overflow:hidden;//超过显示省略号
+    word-wrap:break-word;//自动换行
+    word-break: break-all;
+
+
 }
