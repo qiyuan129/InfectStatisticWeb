@@ -119,3 +119,8 @@
     width:120px;
     color: #35bf5d;
 }
+
+.errorText{
+    color: #bf161a;
+    font-size:200%;
+}
