@@ -3,10 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="css/mycss.css" rel="stylesheet">
 </head>
 <body>
 <div>
-    <p>ahhc</p>
+    <div class="myTextRow">
+        <h1 >标题</h1>
+        <h3>标签</h3>
+        <p>
+            文章内容
+        </p>
+        <form action="/login" method="get">
+            <!--<input type="submit" name="article" value="titleName" />-->
+            <input type="text" name="title" value="标题"/>
+            <input type="text" name="tag" value="标签"/>
+            <input  class="myInput" type="text" name="comment" value="正文"/>
+
+        </form>
+    </div>
 </div>
 </body>
 </html>
