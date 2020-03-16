@@ -63,12 +63,22 @@ public class CountryController {
     }
 
     @RequestMapping("test1")       //省份页面测试
-    public String testProvince(Model map){
+    public String testProvince(Model map,String provinceName,String newDate){
+        LocalDate date;
+
         InfectStatistic infectInfoOperator = new InfectStatistic();
         infectInfoOperator.readLogs();
-        Object[] data=infectInfoOperator.getChartData("福建",LocalDate.parse("2020-02-02")).toArray();
-        DailyInfo provinceStatistic=infectInfoOperator.getProvinceStatistic(LocalDate.parse("2020-02-02"),"福建");
-        DailyInfo provinceChange=infectInfoOperator.getProvinceChange(LocalDate.parse("2020-02-02"),"福建");
+        if(newDate!=null) {
+            date = LocalDate.parse(newDate);
+        }
+        else{
+            date=infectInfoOperator.getEndDate();
+        }
+
+        Object[] data=infectInfoOperator.getChartData(provinceName,date).toArray();
+        DailyInfo provinceStatistic=infectInfoOperator.getProvinceStatistic(date,provinceName);
+        DailyInfo provinceChange=infectInfoOperator.getProvinceChange(date,provinceName);
+        map.addAttribute("provinceName",provinceName);
         map.addAttribute("statistic",provinceStatistic);
         map.addAttribute("change",provinceChange);
         map.addAttribute("Xdata",data[0]);

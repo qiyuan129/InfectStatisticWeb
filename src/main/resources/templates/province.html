@@ -33,7 +33,14 @@
     <div class="myRow">
         <div class="col-md-12">
             <h1 class="myH1">新型冠状肺炎</h1>
-            <p>福建实时动态</p>
+            <p th:text="${provinceName}+'实时动态'"></p>
+            <label th:text="'请选择要查看的日期，当前数据的截止时间为'+${statistic.date}"></label>
+            <form action="/test1" method="get">
+                <input type="text"  style="display:none" name="provinceName" th:value="${provinceName}"/>
+                <input type="date" name="newDate" th:value="${statistic.date}"/>
+                <input type="submit" />
+            </form>
+
         </div>
     </div>
 
@@ -46,10 +53,10 @@
                 <td align="center"><p class="myP">累计治愈</p></td>
             </tr>
             <tr>
-                <td align="center"><p class="num1">522</p></td>
-                <td align="center"><p class="num2">585</p></td>
-                <td align="center"><p class="num3">585</p></td>
-                <td align="center"><p class="num4">585</p></td>
+                <td align="center"><p class="num1" th:text="${statistic.infected}"></p></td>
+                <td align="center"><p class="num2" th:text="${statistic.suspected}"></p></td>
+                <td align="center"><p class="num3" th:text="${statistic.dead}"></p></td>
+                <td align="center"><p class="num4" th:text="${statistic.cured}"></p></td>
             </tr>
         </table>
     </div>
